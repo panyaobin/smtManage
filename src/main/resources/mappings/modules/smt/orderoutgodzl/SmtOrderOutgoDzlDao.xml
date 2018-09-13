@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.orderoutgodzl.SmtOrderOutgoDzlDao">
+    
+	<sql id="smtOrderOutgoDzlColumns">
+		a.id AS "id",
+		a.f_id AS "fId",
+		a.dzl_id AS "dzlId",
+		a.counts AS "counts",
+		a.customer_no AS "customerNo",
+		a.stock_counts AS "stockCounts",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="smtOrderOutgoDzlJoins">
+	</sql>
+
+    <select id="get" resultType="SmtOrderOutgoDzl">
+		SELECT 
+			<include refid="smtOrderOutgoDzlColumns"/>
+		FROM smt_order_outgo_dzl a
+		<include refid="smtOrderOutgoDzlJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="SmtOrderOutgoDzl">
+        SELECT
+            obom.bom_name,
+            obom.bom_type,
+            oo.product_no,
+            oo.outgo_order_no,
+            oo.order_no,
+            od.counts,
+            od.stock_counts,
+            oo.customer_no,
+            sc.customer_name,
+            od.create_date
+        FROM
+            smt_order_outgo_dzl od
+        left join smt_order_dzlbom obom  on od.dzl_id=obom.id
+        left join smt_order_outgo oo on od.f_id =oo.id
+        left join smt_sys_customer sc on oo.customer_no=sc.customer_no
+		<where>
+			od.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="customerNo!=null and customerNo!=''">
+                and oo.customer_no LIKE '%${customerNo}%'
+            </if>
+            <if test="bomName!=null and bomName!=''">
+                and obom.bom_name LIKE '%${bomName}%'
+            </if> 
+            <if test="orderNo!=null and orderNo!=''">
+                and oo.order_no LIKE '%${orderNo}%'
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and oo.product_no LIKE '%${productNo}%'
+            </if>
+            <if test="outgoOrderNo!=null and outgoOrderNo!=''">
+                and oo.outgo_order_no LIKE '%${outgoOrderNo}%'
+            </if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY od.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="SmtOrderOutgoDzl">
+		SELECT 
+			<include refid="smtOrderOutgoDzlColumns"/>
+		FROM smt_order_outgo_dzl a
+		<include refid="smtOrderOutgoDzlJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO smt_order_outgo_dzl(
+			f_id,
+			dzl_id,
+			counts,
+			customer_no,
+			stock_counts,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{fId},
+			#{dzlId},
+			#{counts},
+			#{customerNo},
+			#{stockCounts},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE smt_order_outgo_dzl SET 	
+			f_id = #{fId},
+			dzl_id = #{dzlId},
+			counts = #{counts},
+			customer_no = #{customerNo},
+			stock_counts = #{stockCounts},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE smt_order_outgo_dzl SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+    <update id="cancle_outgo">
+      UPDATE smt_order_outgo_dzl SET 
+			del_flag = 1
+		WHERE f_id = #{fId}
+    </update>
+</mapper>

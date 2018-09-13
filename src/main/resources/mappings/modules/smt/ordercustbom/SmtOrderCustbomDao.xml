@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.ordercustbom.SmtOrderCustbomDao">
+
+    <sql id="smtOrderCustbomColumns">
+		a.id AS "id",
+		a.customer_no AS "customerNo",
+		a.product_no AS "productNo",
+		a.point_counts AS "pointCounts",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderCustbomColumns_forMain">
+		a.id AS "id",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.point_counts AS "pointCounts",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderCustbomJoins">
+    </sql>
+
+    <!--根据主键查明细使用-->
+    <sql id="order_cust_bom_detail_list">
+        oc.customer_no,
+        oc.product_no,
+        oc.point_counts,
+        ocd.dzlbom_id,
+        ocd.counts,
+        ocd.piece_position,
+        ocd.stock_counts,
+        ocd.remarks
+    </sql>
+
+
+    <select id="get" resultType="SmtOrderCustbom">
+        SELECT
+        <include refid="smtOrderCustbomColumns"/>
+        FROM smt_order_custbom a
+        <include refid="smtOrderCustbomJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="SmtOrderCustbom">
+        SELECT
+        <include refid="smtOrderCustbomColumns_forMain"/>
+        FROM smt_order_custbom a
+        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        <where>
+            1=1
+            <if test="id!=null and id!=''">
+                and a.id=#{id}
+            </if>
+            <if test="customerNo!=null and customerNo!=''">
+                and a.customer_no=#{customerNo}
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and a.product_no like '%${productNo}%'
+            </if>
+
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findCustBomDetailById" resultType="com.thinkgem.jeesite.modules.smt.vo.SmtOrderCustBomVO">
+        SELECT
+        <include refid="order_cust_bom_detail_list"/>
+        FROM
+        `smt_order_custbom` oc
+        LEFT JOIN smt_order_custbom_detail ocd on oc.id=ocd.custbom_id
+        <where>
+            oc.id=#{id}
+            AND oc.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        ORDER BY oc.update_date DESC
+    </select>
+
+    <select id="findAllList" resultType="SmtOrderCustbom">
+        SELECT
+        <include refid="smtOrderCustbomColumns"/>
+        FROM smt_order_custbom a
+        <include refid="smtOrderCustbomJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--验证客户bom是否存在-->
+    <select id="validateProductNo" resultType="java.lang.Integer">
+        SELECT
+	      count(1)
+        FROM
+	      smt_order_custbom bom
+	    WHERE
+	      bom.del_flag=0
+	      and bom.product_no=#{productNo}
+	      and bom.customer_no=#{customerNo}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO smt_order_custbom(
+			customer_no,
+			product_no,
+			point_counts,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{customerNo},
+			#{productNo},
+			#{pointCounts},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+        )
+	</insert>
+
+    <insert id="batchInsert">
+        INSERT INTO smt_order_custbom(
+        customer_no,
+        product_no,
+        point_counts,
+        create_date,
+        create_by,
+        update_date,
+        update_by,
+        remarks,
+        del_flag
+        ) VALUES
+        <foreach item="item" index="index" collection="list" separator=",">(
+            #{item.customerNo},
+            #{item.productNo},
+            #{item.pointCounts},
+            #{item.createDate},
+            #{item.createBy.id},
+            #{item.updateDate},
+            #{item.updateBy.id},
+            #{item.remarks},
+            #{item.delFlag}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+		UPDATE smt_order_custbom SET 	
+			customer_no = #{customerNo},
+			product_no = #{productNo},
+			point_counts = #{pointCounts},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE smt_order_custbom SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

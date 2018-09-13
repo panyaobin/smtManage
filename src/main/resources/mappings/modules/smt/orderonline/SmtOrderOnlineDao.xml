@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.orderonline.SmtOrderOnlineDao">
+
+    <sql id="smtOrderOnlineColumns">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.send_no AS "sendNo",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		a.counts AS "counts",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <!--合计同一客户订单的数据信息-->
+    <sql id="smtOrderOnlineColumn">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		sum(a.counts) AS "counts",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderOnlineJoins">
+        LEFT JOIN smt_sys_customer b on a.customer_no=b.customer_no
+	</sql>
+
+    <select id="get" resultType="SmtOrderOnline">
+        SELECT
+        <include refid="smtOrderOnlineColumns"/>
+        FROM smt_order_online a
+        <include refid="smtOrderOnlineJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="SmtOrderOnline">
+        SELECT
+        <include refid="smtOrderOnlineColumns"/>
+        FROM smt_order_online a
+        <include refid="smtOrderOnlineJoins"/>
+        <where>
+            1=1
+            <if test="customerNo!=null and customerNo!=''">
+                and a.customer_no LIKE '%${customerNo}%'
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and a.product_no LIKE '%${productNo}%'
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and a.order_no LIKE '%${orderNo}%'
+            </if>
+            and a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findLists" resultType="SmtOrderOnline">
+        select *
+        from 
+        (SELECT
+        one.id as "id",
+        one.productType as "productType",
+        one.orderNo AS "orderNo",
+        one.customerNo AS "customerNo",
+        one.customerName AS "customerName",
+        one.productNo AS "productNo",
+        one.counts -
+        IF
+        ( ISNULL( sum( pro.entry_counts ) ), 0, sum( pro.entry_counts) ) AS "counts",
+        one.createDate AS "createDate",
+        one.updateDate AS "updateDate",
+        one.remarks AS "remarks",
+        one.delFlag AS "delFlag"
+        from
+        (SELECT
+        a.id AS "id",
+        a.order_no AS "orderNo",
+        a.customer_no AS "customerNo",
+        b.customer_name AS "customerName",
+        a.product_no AS "productNo",
+        a.product_type AS "productType",
+        sum( a.counts ) AS "counts",
+        a.create_date AS "createDate",
+        a.create_by AS "createBy.id",
+        a.update_date AS "updateDate",
+        a.update_by AS "updateBy.id",
+        a.remarks AS "remarks",
+        a.del_flag AS "delFlag"
+        FROM
+        smt_order_online a
+        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        WHERE
+        1 = 1
+        AND a.del_flag = 0
+        GROUP BY
+        a.customer_no,
+        a.product_type,
+        a.product_no ) one
+        LEFT JOIN smt_product_entry pro  ON one.productNo = pro.product_no
+        AND one.customerNo = pro.customer_no
+        AND pro.del_flag = 0
+        where
+        1=1
+        <if test="productType!=null and productType!=''">
+            and one.productType=#{productType}
+        </if>
+        GROUP BY
+        one.customerNo,one.productNo
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>) ww
+        where ww.counts!=0
+
+        <if test="customerNo!=null and customerNo!=''">
+            and ww.customerNo LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and ww.productNo LIKE '%${productNo}%'
+        </if>
+    </select>
+
+    <select id="findAllList" resultType="SmtOrderOnline">
+        SELECT
+        <include refid="smtOrderOnlineColumns"/>
+        FROM smt_order_online a
+        <include refid="smtOrderOnlineJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--根据在线结存ID和类型查询在线结存数量,输入数量成品入库-->
+    <select id="findProductEntryCount" resultType="smtOrderOnline" parameterType="smtOrderOnline">
+        SELECT
+        one.id as "id",
+        one.productType as "productType",
+        one.orderNo AS "orderNo",
+        one.customerNo AS "customerNo",
+        one.customerName AS "customerName",
+        one.productNo AS "productNo",
+        one.counts -
+        IF
+        ( ISNULL( sum( pro.entry_counts ) ), 0, sum( pro.entry_counts) ) AS "counts",
+        one.createDate AS "createDate",
+        one.updateDate AS "updateDate",
+        one.remarks AS "remarks",
+        one.delFlag AS "delFlag"
+        from
+        (SELECT
+        a.id AS "id",
+        a.order_no AS "orderNo",
+        a.customer_no AS "customerNo",
+        b.customer_name AS "customerName",
+        a.product_no AS "productNo",
+        a.product_type AS "productType",
+        sum( a.counts ) AS "counts",
+        a.create_date AS "createDate",
+        a.create_by AS "createBy.id",
+        a.update_date AS "updateDate",
+        a.update_by AS "updateBy.id",
+        a.remarks AS "remarks",
+        a.del_flag AS "delFlag"
+        FROM
+        smt_order_online a
+        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        WHERE
+        1 = 1
+        AND a.del_flag = 0
+        GROUP BY
+        a.customer_no,
+        a.product_type,
+        a.product_no ) one
+        LEFT JOIN smt_product_entry pro  ON one.productNo = pro.product_no
+        AND one.customerNo = pro.customer_no
+        AND pro.del_flag = 0
+        where
+        1=1 
+        <if test="customerNo!=null and customerNo!=''">
+            and one.customerNo LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and one.productNo LIKE '%${productNo}%'
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and one.orderNo LIKE '%${orderNo}%'
+        </if>
+        <if test="id!=null and id!=''">
+            and one.id in (${id})
+        </if>
+        GROUP BY
+        one.customerNo,
+        one.productNo
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY one.updateDate DESC
+            </otherwise>
+        </choose>
+    </select>
+    
+    <!--查询最大的发料号-->
+    <select id="findSendNoFromList" resultType="java.lang.String">
+        SELECT 
+          send_no
+        FROM
+          smt_order_online
+        ORDER BY send_no desc
+        limit 1 
+    </select>
+
+    <insert id="insert">
+		INSERT INTO smt_order_online(
+			order_no,
+			send_no,
+			customer_no,
+			product_no,
+			product_type,
+			counts,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{orderNo},
+			#{sendNo},
+			#{customerNo},
+			#{productNo},
+			#{productType},
+			#{counts},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE smt_order_online SET 	
+			order_no = #{orderNo},
+			send_no = #{sendNo},
+			customer_no = #{customerNo},
+			product_no = #{productNo},
+			product_type = #{productType},
+			counts = #{counts},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE smt_order_online SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

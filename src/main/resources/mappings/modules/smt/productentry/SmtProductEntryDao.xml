@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.productentry.SmtProductEntryDao">
+    
+	<sql id="smtProductEntryColumns">
+		a.id AS "id",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.order_no AS "orderNo",
+		a.entry_counts AS "entryCounts",
+		a.product_type AS "productType",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="smtProductEntryJoins">
+        LEFT JOIN smt_sys_customer b on a.customer_no=b.customer_no
+	</sql>
+    
+	<select id="get" resultType="SmtProductEntry">
+		SELECT 
+			<include refid="smtProductEntryColumns"/>
+		FROM smt_product_entry a
+		<include refid="smtProductEntryJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="SmtProductEntry">
+		SELECT 
+			<include refid="smtProductEntryColumns"/>
+		FROM smt_product_entry a
+		<include refid="smtProductEntryJoins"/>
+		<where>
+            1=1
+            <if test="productType!=null and productType!=''">
+                and a.product_type=#{productType}
+            </if>
+            <if test="customerNo!=null and customerNo!=''">
+                and a.customer_no=#{customerNo}
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and a.product_no LIKE '%${productNo}%'
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and a.order_no LIKE '%${orderNo}%'
+            </if>
+			AND a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="SmtProductEntry">
+		SELECT 
+			<include refid="smtProductEntryColumns"/>
+		FROM smt_product_entry a
+		<include refid="smtProductEntryJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+    
+    <!--查询最大的入库单号-->
+    <select id="findOrderNoFromList" resultType="java.lang.String">
+         SELECT 
+          order_no
+        FROM
+          smt_product_entry
+        ORDER BY order_no desc
+        limit 1 
+    </select>
+
+    <insert id="insert">
+		INSERT INTO smt_product_entry(
+			customer_no,
+			product_no,
+			order_no,
+			entry_counts,
+			product_type,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{customerNo},
+			#{productNo},
+			#{orderNo},
+			#{entryCounts},
+			#{productType},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE smt_product_entry SET 	
+			customer_no = #{customerNo},
+			product_no = #{productNo},
+			order_no = #{orderNo},
+			entry_counts = #{entryCounts},
+			product_type = #{productType},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE smt_product_entry SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

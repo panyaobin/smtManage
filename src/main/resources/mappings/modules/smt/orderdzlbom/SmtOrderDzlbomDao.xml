@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.orderdzlbom.SmtOrderDzlbomDao">
+
+    <sql id="smtOrderDzlbomColumns">
+		a.id AS "id",
+		a.bom_name AS "bomName",
+		a.package_size AS "packageSize",
+		a.bom_type AS "bomType",
+		a.func_value AS "funcValue",
+		a.voltage AS "voltage",
+		a.business AS "business",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderDzlbomJoins">
+    </sql>
+
+    <select id="get" resultType="SmtOrderDzlbom">
+        SELECT
+        <include refid="smtOrderDzlbomColumns"/>
+        FROM smt_order_dzlbom a
+        <include refid="smtOrderDzlbomJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="SmtOrderDzlbom">
+        SELECT
+        <include refid="smtOrderDzlbomColumns"/>
+        FROM smt_order_dzlbom a
+        <include refid="smtOrderDzlbomJoins"/>
+        <where>
+            1=1
+            <if test="bomName!=null and bomName!=''">
+                AND a.bom_name LIKE '%${bomName}%'
+            </if>
+            <if test="bomType!=null and bomType!=''">
+                AND a.bom_type LIKE '%${bomType}%'
+            </if>
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="SmtOrderDzlbom">
+        SELECT
+        <include refid="smtOrderDzlbomColumns"/>
+        FROM smt_order_dzlbom a
+        <include refid="smtOrderDzlbomJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--通过客户编码和产品型号查询对应的电子料明细信息-->
+    <select id="findDzlDetail" resultType="com.thinkgem.jeesite.modules.smt.entity.orderdzlbom.SmtOrderDzlbom">
+        SELECT
+            a.id,
+            a.bom_name,
+            a.bom_type,
+            a.remarks,
+            b.counts,
+            b.stock_counts
+        FROM
+	        smt_order_dzlbom a
+	    left join 
+	        smt_order_custbom_detail b on a.id=b.dzlbom_id
+	    where 
+	        b.custbom_id in 
+	          (SELECT c.id from smt_order_custbom c where c.customer_no=#{customerNo} and c.product_no=#{productNo} and c.del_flag = 0)
+	        and 
+	        a.del_flag = 0
+	    GROUP BY a.create_date desc
+    </select>
+
+    <!--查询是否已经存在bomName-->
+    <select id="validateBomName" resultType="java.lang.Integer">
+       SELECT
+          count(1)
+       from
+           smt_order_dzlbom
+          where bom_name=#{bomName}
+          
+    </select>
+
+
+    <insert id="insert">
+		INSERT INTO smt_order_dzlbom(
+			bom_name,
+			package_size,
+			bom_type,
+			func_value,
+			voltage,
+			business,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{bomName},
+			#{packageSize},
+			#{bomType},
+			#{funcValue},
+			#{voltage},
+			#{business},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE smt_order_dzlbom SET 	
+			bom_name = #{bomName},
+			package_size = #{packageSize},
+			bom_type = #{bomType},
+			func_value = #{funcValue},
+			voltage = #{voltage},
+			business = #{business},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE smt_order_dzlbom SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

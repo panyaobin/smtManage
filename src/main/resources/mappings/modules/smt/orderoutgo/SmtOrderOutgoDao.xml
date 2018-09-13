@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.orderoutgo.SmtOrderOutgoDao">
+
+    <sql id="smtOrderOutgoColumns">
+		a.id AS "id",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.order_no AS "orderNo",
+		a.counts AS "counts",
+		a.point_counts AS "pointCounts",
+		a.outgo_order_no AS "outgoOrderNo",
+		a.product_type AS "productType",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderOutgoJoins">
+        LEFT JOIN smt_sys_customer b on a.customer_no=b.customer_no
+    </sql>
+
+    <select id="get" resultType="SmtOrderOutgo">
+        SELECT
+        <include refid="smtOrderOutgoColumns"/>
+        FROM smt_order_outgo a
+        <include refid="smtOrderOutgoJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="SmtOrderOutgo">
+        SELECT
+        <include refid="smtOrderOutgoColumns"/>
+        FROM smt_order_outgo a
+        <include refid="smtOrderOutgoJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            and a.outgo_order_no not REGEXP '^[9]'
+            <if test="outgoOrderNo !=null and outgoOrderNo!=''">
+                and a.outgo_order_no LIKE '%${outgoOrderNo}%'
+            </if>
+            <if test="customerNo!=null and customerNo!=''">
+                and a.customer_no LIKE '%${customerNo}%'
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and a.product_no LIKE '%${productNo}%'
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and a.order_no LIKE '%${orderNo}%'
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="SmtOrderOutgo">
+        SELECT
+        <include refid="smtOrderOutgoColumns"/>
+        FROM smt_order_outgo a
+        <include refid="smtOrderOutgoJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--根据已经客户代码获取是否存在出货单号-->
+    <select id="getExistOutgoOrderNo" resultType="string">
+        SELECT
+	      a.outgo_order_no 
+        FROM
+	      smt_order_outgo a
+	    where 
+          a.customer_no=#{customerNo}
+          and a.del_flag = 0
+          AND a.outgo_order_no NOT REGEXP '^[9]'
+        order by 
+          a.outgo_order_no desc
+ LIMIT 1
+    </select>
+
+    <!--查询退货列表信息-->
+    <select id="findReturnGoodsPage" resultType="com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgo">
+        SELECT
+        a.id,
+        a.customer_no,
+        b.customer_name,
+        a.product_no,
+        a.order_no,
+        a.counts,
+        a.product_type,
+        a.outgo_order_no,
+        a.create_date
+        from
+        smt.smt_order_outgo a
+        <include refid="smtOrderOutgoJoins"/>
+        where a.outgo_order_no REGEXP '^[9]' and a.del_flag=#{DEL_FLAG_NORMAL}
+        <if test="outgoOrderNo !=null and outgoOrderNo!=''">
+            and a.outgo_order_no LIKE '%${outgoOrderNo}%'
+        </if>
+        <if test="customerNo!=null and customerNo!=''">
+            and a.customer_no LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and a.product_no LIKE '%${productNo}%'
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and a.order_no LIKE '%${orderNo}%'
+        </if>
+    </select>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO smt_order_outgo(
+			customer_no,
+			product_no,
+			order_no,
+			counts,
+			point_counts,
+			outgo_order_no,
+			product_type,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{customerNo},
+			#{productNo},
+			#{orderNo},
+			#{counts},
+			#{pointCounts},
+			#{outgoOrderNo},
+			#{productType},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE smt_order_outgo SET 	
+			customer_no = #{customerNo},
+			product_no = #{productNo},
+			order_no = #{orderNo},
+			counts = #{counts},
+			point_counts = #{pointCounts},
+			outgo_order_no = #{outgoOrderNo},
+			product_type = #{productType},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE smt_order_outgo SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

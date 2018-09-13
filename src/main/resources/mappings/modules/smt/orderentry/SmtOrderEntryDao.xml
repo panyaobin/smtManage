@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.orderentry.SmtOrderEntryDao">
+
+    <sql id="smtOrderEntryColumns">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.order_date AS "orderDate",
+		a.customer_no AS "customerNo",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		a.counts AS "counts",
+		a.package_size AS "packageSize",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderEntryColumns_list">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.order_date AS "orderDate",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		a.counts AS "counts",
+		a.package_size AS "packageSize",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <!--产品出货主PFC出货数量汇总-->
+    <sql id="smtOrderEntryColumns_list_total">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.order_date AS "orderDate",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		a.counts-IFNULL(sum(c.counts),0) AS "counts",
+		a.package_size AS "packageSize",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+
+    <!--出货查询orderinfo和点数使用-->
+    <sql id="smtOrderEntryColumns_list_point">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.order_date AS "orderDate",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		a.counts AS "counts",
+		c.point_counts AS "pointCounts",
+		a.package_size AS "packageSize",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <!--合计同一种类型 fpc,电子料数量。及统计发料数量-->
+    <sql id="smtOrderEntryColumns_lists">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.order_date AS "orderDate",
+		a.customer_no AS "customerNo",
+		b.customer_name AS "customerName",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		sum(a.counts)-if(ISNULL(sum(c.counts)),0,sum(c.counts)) AS "counts",
+		a.package_size AS "packageSize",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <!--合计同一客户订单的数据信息-->
+    <sql id="smtOrderEntryColumn">
+		a.id AS "id",
+		a.order_no AS "orderNo",
+		a.order_date AS "orderDate",
+		a.customer_no AS "customerNo",
+		a.product_no AS "productNo",
+		a.product_type AS "productType",
+		sum(a.counts) AS "counts",
+		a.package_size AS "packageSize",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderEntryJoins">
+        LEFT JOIN smt_sys_customer b on a.customer_no=b.customer_no
+    </sql>
+
+    <select id="get" resultType="SmtOrderEntry">
+        SELECT
+        <include refid="smtOrderEntryColumns_list"/>
+        FROM smt_order_entry a
+        <include refid="smtOrderEntryJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="SmtOrderEntry">
+        SELECT
+        <include refid="smtOrderEntryColumns_list_total"/>
+        FROM smt_order_entry a
+        <include refid="smtOrderEntryJoins"/>
+        left join smt_order_outgo c on a.customer_no=c.customer_no and a.order_no=c.order_no and a.product_no=c.product_no and c.del_flag = #{DEL_FLAG_NORMAL}
+        <where>
+            a.counts - IFNULL( c.counts, 0 )!=0
+            <if test="productType!=null and productType!=''">
+                and a.product_type=#{productType}
+            </if>
+            <if test="customerNo!=null and customerNo!=''">
+                and a.customer_no LIKE '%${customerNo}%'
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and a.product_no LIKE '%${productNo}%'
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and a.order_no LIKE '%${orderNo}%'
+            </if>
+            and a.del_flag = #{DEL_FLAG_NORMAL}
+            GROUP BY a.customer_no,a.product_no,a.order_no
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--主列表信息-->
+    <select id="findMainList" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+        SELECT
+        <include refid="smtOrderEntryColumns_list"/>
+        FROM smt_order_entry a
+        <include refid="smtOrderEntryJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="productType!=null and productType!=''">
+                and a.product_type=#{productType}
+            </if>
+            <if test="customerNo!=null and customerNo!=''">
+                and a.customer_no LIKE '%${customerNo}%'
+            </if>
+            <if test="productNo!=null and productNo!=''">
+                and a.product_no LIKE '%${productNo}%'
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and a.order_no LIKE '%${orderNo}%'
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <!--这里是入库列表查看需要统计数据的列表SQL-->
+    <select id="findLists" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+        select *
+        from
+        (SELECT
+        one.id AS "id",
+        one.orderNo AS "orderNo",
+        one.orderDate AS "orderDate",
+        one.customerNo AS "customerNo",
+        one.customerName AS "customerName",
+        one.productNo AS "productNo",
+        one.counts-if(ISNULL(sum(d.counts)),0,sum(d.counts)) as "counts",
+        one.productType AS "productType",
+        one.packageSize AS "packageSize",
+        one.createDate AS "createDate",
+        one.updateDate AS "updateDate",
+        one.remarks AS "remarks",
+        one.delFlag AS "delFlag"
+        FROM
+        (SELECT a.id AS "id", a.order_no AS "orderNo", a.order_date AS "orderDate", a.customer_no AS "customerNo", b.customer_name AS "customerName", a.product_no AS "productNo", a.product_type AS "productType", sum(a.counts) as "counts", a.package_size AS "packageSize", a.create_date AS
+        "createDate", a.create_by AS "createBy.id", a.update_date AS "updateDate", a.update_by AS "updateBy.id", a.remarks AS "remarks", a.del_flag AS "delFlag" FROM
+        smt_order_entry a LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        WHERE 1 = 1
+        <if test="productType!=null and productType!=''">
+            AND a.product_type =#{productType}
+        </if>
+        AND a.del_flag =#{DEL_FLAG_NORMAL} GROUP BY a.customer_no, a.product_no ) one
+
+        LEFT join smt_order_online d on one.productNo=d.product_no and one.customerNo =d.customer_no and d.del_flag = #{DEL_FLAG_NORMAL}
+
+        where 1=1
+        <if test="customerNo!=null and customerNo!=''">
+            and one.customerNo LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and one.productNo LIKE '%${productNo}%'
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and one.orderNo LIKE '%${orderNo}%'
+        </if>
+        <if test="id!=null and id!=''">
+            and one.id in (${id})
+        </if>
+        GROUP BY one.customerNo, one.productNo
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        ) ff
+        where ff.counts != 0
+
+    </select>
+
+    <!--这里是入库列表查看需要统计数据的列表SQL-->
+    <select id="findLists_s" resultType="SmtOrderEntry">
+        SELECT
+        *
+        FROM (
+        SELECT
+        <include refid="smtOrderEntryColumns_lists"/>
+        FROM smt_order_entry a
+        <include refid="smtOrderEntryJoins"/>
+        left join smt_order_online c on a.customer_no=c.customer_no and a.product_no=c.product_no
+        <where>
+            1=1
+            <if test="productType!=null and productType!=''">
+                and a.product_type=#{productType}
+            </if>
+            and a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        GROUP BY
+        a.customer_no,a.product_no
+        ) bb
+        where 1=1
+        <if test="customerNo!=null and customerNo!=''">
+            and bb.customerNo LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and bb.productNo LIKE '%${productNo}%'
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and bb.orderNo LIKE '%${orderNo}%'
+        </if>
+        <if test="id!=null and id!=''">
+            and bb.id in (${id})
+        </if>
+
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY bb.updateDate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="SmtOrderEntry">
+        SELECT
+        <include refid="smtOrderEntryColumns_list"/>
+        FROM smt_order_entry a
+        <include refid="smtOrderEntryJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--通过ID查找产品入库信息和点数-->
+    <select id="findOrderInfoById" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+          SELECT
+            distinct q.id AS "id",
+            q.order_no AS "orderNo",
+            q.order_date AS "orderDate",
+            q.customer_no AS "customerNo",
+            b.customer_name AS "customerName",
+            q.product_no AS "productNo",
+            bom.point_counts AS "pointCounts",
+            q.product_type AS "productType",
+            q.counts - IFNULL( w.goCounts, 0 ) AS "counts",
+            q.create_date AS "createDate",
+            q.create_by AS "createBy.id",
+            q.update_date AS "updateDate",
+            q.update_by AS "updateBy.id",
+            q.remarks AS "remarks",
+            q.del_flag AS "delFlag" 
+        FROM
+            (
+        SELECT
+            a.id,
+            a.order_no,
+            a.order_date,
+            a.customer_no,
+            b.customer_name,
+            a.product_no,
+            a.product_type,
+            a.counts,
+            a.create_date,
+            a.create_by,
+            a.update_date,
+            a.update_by,
+            a.remarks,
+            a.del_flag 
+        FROM
+            smt_order_entry a
+            LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no 
+        WHERE
+            1 = 1 
+            AND a.product_type = 1 
+            AND a.del_flag = 0 
+            ) q
+            LEFT JOIN (
+        SELECT
+            go.id,
+            go.customer_no,
+            go.product_no,
+            go.order_no,
+            sum( go.counts ) AS "goCounts",
+            go.point_counts,
+            go.outgo_order_no,
+            go.product_type,
+            go.create_date 
+        FROM
+            smt_order_outgo go 
+        WHERE
+            del_flag = 0 
+        GROUP BY
+            customer_no,
+            order_no,
+            product_no 
+            ) w ON q.customer_no = w.customer_no 
+            AND q.order_no = w.order_no 
+            AND q.product_no = w.product_no
+            LEFT JOIN smt_sys_customer b ON q.customer_no = b.customer_no
+            LEFT join smt_order_custbom bom on q.customer_no =bom.customer_no and q.product_no =bom.product_no
+        WHERE
+	      q.id = #{id}
+    </select>
+
+    <!--出货列表 订单出货数据统计-->
+    <select id="findTotalPageList" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+        SELECT
+        q.id AS "id",
+        q.order_no AS "orderNo",
+        q.order_date AS "orderDate",
+        q.customer_no AS "customerNo",
+        b.customer_name AS "customerName",
+        q.product_no AS "productNo",
+        q.product_type AS "productType",
+        q.counts - IFNULL( w.goCounts, 0 ) AS "counts",
+        q.create_date AS "createDate",
+        q.create_by AS "createBy.id",
+        q.update_date AS "updateDate",
+        q.update_by AS "updateBy.id",
+        q.remarks AS "remarks",
+        q.del_flag AS "delFlag"
+        FROM
+        (
+        SELECT
+        a.id,
+        a.order_no,
+        a.order_date,
+        a.customer_no,
+        b.customer_name,
+        a.product_no,
+        a.product_type,
+        a.counts,
+        a.create_date,
+        a.create_by,
+        a.update_date,
+        a.update_by,
+        a.remarks,
+        a.del_flag
+        FROM
+        smt_order_entry a
+        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        WHERE
+        1 = 1
+        AND a.product_type = 1
+        AND a.del_flag = 0
+        ) q
+        LEFT JOIN (
+        SELECT
+        go.id,
+        go.customer_no,
+        go.product_no,
+        go.order_no,
+        sum( go.counts ) AS "goCounts",
+        go.point_counts,
+        go.outgo_order_no,
+        go.product_type,
+        go.create_date
+        FROM
+        smt_order_outgo go
+        WHERE
+        del_flag = 0
+        GROUP BY
+        customer_no,
+        order_no,
+        product_no
+        ) w ON q.customer_no = w.customer_no
+        AND q.order_no = w.order_no
+        AND q.product_no = w.product_no
+        LEFT JOIN smt_sys_customer b ON q.customer_no = b.customer_no
+        where q.counts - IFNULL( w.goCounts, 0 )!=0
+        <if test="customerNo!=null and customerNo!=''">
+            and q.customer_no LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and q.product_no LIKE '%${productNo}%'
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and q.order_no LIKE '%${orderNo}%'
+        </if>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY q.create_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--查询可退货列表-->
+    <select id="findReturnGoodsList" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        q.id AS "id",
+        q.order_no AS "orderNo",
+        q.order_date AS "orderDate",
+        q.customer_no AS "customerNo",
+        b.customer_name AS "customerName",
+        q.product_no AS "productNo",
+        q.product_type AS "productType",
+        q.counts - IFNULL( w.goCounts, 0 ) AS "counts",
+        q.create_date AS "createDate",
+        q.create_by AS "createBy.id",
+        q.update_date AS "updateDate",
+        q.update_by AS "updateBy.id",
+        q.remarks AS "remarks",
+        q.del_flag AS "delFlag"
+        FROM
+        (
+        SELECT
+        a.id,
+        a.order_no,
+        a.order_date,
+        a.customer_no,
+        b.customer_name,
+        a.product_no,
+        a.product_type,
+        a.counts,
+        a.create_date,
+        a.create_by,
+        a.update_date,
+        a.update_by,
+        a.remarks,
+        a.del_flag
+        FROM
+        smt_order_entry a
+        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        WHERE
+        1 = 1
+        AND a.product_type = 1
+        AND a.del_flag = 0
+        ) q
+        LEFT JOIN (
+        SELECT
+        go.id,
+        go.customer_no,
+        go.product_no,
+        go.order_no,
+        sum( go.counts ) AS "goCounts",
+        go.point_counts,
+        go.outgo_order_no,
+        go.product_type,
+        go.create_date
+        FROM
+        smt_order_outgo go
+        WHERE
+        del_flag = 0
+        GROUP BY
+        customer_no,
+        order_no,
+        product_no
+        ) w ON q.customer_no = w.customer_no
+        AND q.order_no = w.order_no
+        AND q.product_no = w.product_no
+        LEFT JOIN smt_sys_customer b ON q.customer_no = b.customer_no UNION ALL
+        SELECT distinct
+        entry.id AS "id",
+        entry.order_no AS "orderNo",
+        entry.order_date AS "orderDate",
+        entry.customer_no AS "customerNo",
+        b.customer_name AS "customerName",
+        entry.product_no AS "productNo",
+        entry.product_type AS "productType",
+        entry.counts - IFNULL( c.counts, 0 ) AS "counts",
+        entry.create_date AS "createDate",
+        entry.create_by AS "createBy.id",
+        entry.update_date AS "updateDate",
+        entry.update_by AS "updateBy.id",
+        entry.remarks AS "remarks",
+        entry.del_flag AS "delFlag"
+        FROM
+        smt_order_entry entry
+        LEFT JOIN smt_sys_customer b ON entry.customer_no = b.customer_no
+        LEFT JOIN smt_order_outgo c ON entry.customer_no = c.customer_no
+        AND entry.order_no = c.order_no and entry.product_no=c.product_no
+        AND c.del_flag = 0
+        WHERE
+        entry.product_type = 2
+        AND entry.del_flag = 0
+        ) goods
+        where goods.counts!=0
+        <if test="customerNo!=null and customerNo!=''">
+            and goods.customerNo LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and goods.productNo LIKE '%${productNo}%'
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and goods.orderNo LIKE '%${orderNo}%'
+        </if>
+        <if test="id!=null and id!=''">
+            and goods.id in (${id})
+        </if>
+    </select>
+
+    <!--电子料待出货列表-->
+    <select id="findDzlMainPage" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+        SELECT
+        kk.customerNo,
+        kk.customerName,
+        kk.productNo,
+        kk.productType,
+        IFNULL(gg.counts, 0) as "outCount",
+        kk.counts-IFNULL(gg.counts, 0) as "counts"
+        FROM
+        (
+        SELECT
+        oe.customerNo,
+        oe.customerName,
+        oe.productNo,
+        oe.productType,
+        sum( oe.counts ) AS "counts"
+        FROM
+        (
+        SELECT
+        a.id AS "id",
+        a.order_no AS "orderNo",
+        a.order_date AS "orderDate",
+        a.customer_no AS "customerNo",
+        b.customer_name AS "customerName",
+        a.product_no AS "productNo",
+        a.product_type AS "productType",
+        a.counts - IFNULL( sum( c.counts ), 0 ) AS "counts",
+        a.package_size AS "packageSize",
+        a.create_date AS "createDate",
+
+        a.create_by AS "createBy.id",
+        a.update_date AS "updateDate",
+        a.update_by AS "updateBy.id",
+        a.remarks AS "remarks",
+        a.del_flag AS "delFlag"
+        FROM
+        smt_order_entry a
+        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        LEFT JOIN smt_order_outgo c ON a.customer_no = c.customer_no
+        AND a.order_no = c.order_no
+        AND a.product_no = c.product_no
+        AND c.del_flag = 0
+        WHERE
+        a.counts - IFNULL( c.counts, 0 ) != 0
+        AND a.product_type = 2
+        AND a.del_flag = 0
+        GROUP BY
+        a.customer_no,
+        a.product_no,
+        a.order_no
+        ) oe
+        WHERE
+        oe.delFlag = 0
+        GROUP BY
+        oe.customerNo,
+        oe.productNo
+        ) kk
+        left join smt_order_outgo_dzl gg on kk.customerNo=gg.customer_no and kk.productNo=gg.dzl_id and gg.del_flag=0
+        where
+        1=1
+        <if test="customerNo!=null and customerNo!=''">
+            and kk.customerNo LIKE '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and kk.productNo LIKE '%${productNo}%'
+        </if>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY kk.customerNo
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <insert id="insert">
+		INSERT INTO smt_order_entry(
+			order_no,
+			order_date,
+			customer_no,
+			product_no,
+			product_type,
+			counts,
+			package_size,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{orderNo},
+			#{orderDate},
+			#{customerNo},
+			#{productNo},
+			#{productType},
+			#{counts},
+			#{packageSize},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+        )
+	</insert>
+
+    <update id="update">
+		UPDATE smt_order_entry SET 	
+			order_no = #{orderNo},
+			order_date = #{orderDate},
+			customer_no = #{customerNo},
+			product_no = #{productNo},
+			product_type = #{productType},
+			counts = #{counts},
+			package_size = #{packageSize},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE smt_order_entry SET
+		     update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

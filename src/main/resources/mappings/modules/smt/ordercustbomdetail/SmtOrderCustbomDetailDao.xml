@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.ordercustbomdetail.SmtOrderCustbomDetailDao">
+
+    <sql id="smtOrderCustbomDetailColumns">
+		a.id AS "id",
+		a.custbom_id AS "custbomId",
+		a.dzlbom_id AS "dzlbomId",
+		a.piece_position AS "piecePosition",
+		a.counts AS "counts",
+		a.stock_counts AS "stockCounts",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="smtOrderCustbomDetailJoins">
+    </sql>
+
+    <select id="get" resultType="SmtOrderCustbomDetail">
+        SELECT
+        <include refid="smtOrderCustbomDetailColumns"/>
+        FROM smt_order_custbom_detail a
+        <include refid="smtOrderCustbomDetailJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="SmtOrderCustbomDetail">
+        SELECT
+        <include refid="smtOrderCustbomDetailColumns"/>
+        FROM smt_order_custbom_detail a
+        <include refid="smtOrderCustbomDetailJoins"/>
+        <where>
+            1=1
+            <if test="custbomId!=null and custbomId!=''">
+              and  a.custbom_id=#{custbomId}
+            </if>
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="SmtOrderCustbomDetail">
+        SELECT
+        <include refid="smtOrderCustbomDetailColumns"/>
+        FROM smt_order_custbom_detail a
+        <include refid="smtOrderCustbomDetailJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert">
+		INSERT INTO smt_order_custbom_detail(
+			custbom_id,
+			dzlbom_id,
+			piece_position,
+			counts,
+			stock_counts,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{custbomId},
+			#{dzlbomId},
+			#{piecePosition},
+			#{counts},
+			#{stockCounts},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE smt_order_custbom_detail SET 	
+			custbom_id = #{custbomId},
+			dzlbom_id = #{dzlbomId},
+			piece_position = #{piecePosition},
+			counts = #{counts},
+			stock_counts = #{stockCounts},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE smt_order_custbom_detail SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+    <!--删除bom操作-->
+    <update id="act_delete">
+		UPDATE smt_order_custbom_detail SET
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE
+		  custbom_id = #{custbomId}
+	</update>
+
+</mapper>
