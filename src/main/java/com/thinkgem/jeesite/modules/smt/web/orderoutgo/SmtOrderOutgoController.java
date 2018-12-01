@@ -15,6 +15,7 @@ import com.thinkgem.jeesite.modules.smt.entity.orderdzlbom.SmtOrderDzlbom;
 import com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry;
 import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.OutGoVO;
 import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgo;
+import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgoVO;
 import com.thinkgem.jeesite.modules.smt.entity.orderoutgodzl.SmtOrderOutgoDzl;
 import com.thinkgem.jeesite.modules.smt.service.orderdzlbom.SmtOrderDzlbomService;
 import com.thinkgem.jeesite.modules.smt.service.orderentry.SmtOrderEntryService;
@@ -50,7 +51,7 @@ import java.util.*;
 public class SmtOrderOutgoController extends BaseController {
 
     private static Logger log = LoggerFactory.getLogger(SmtOrderOutgoController.class);
-    
+
     @Autowired
     private SmtOrderOutgoService smtOrderOutgoService;
 
@@ -71,8 +72,8 @@ public class SmtOrderOutgoController extends BaseController {
 
     private static HttpServletResponse responses;
 
-    //    private static final  String jasperPath="F:\\outgo.jasper";
-    private static final String jasperPath = Thread.currentThread().getContextClassLoader().getResource("jasper/").getPath() + "outgo.jasper";
+            private static final  String jasperPath="F:\\outgo.jasper";
+//    private static final String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\outgo.jasper";
 
     @ModelAttribute
     public SmtOrderOutgo get(@RequestParam(required = false) String id) {
@@ -85,7 +86,7 @@ public class SmtOrderOutgoController extends BaseController {
         }
         return entity;
     }
-
+    
     @RequiresPermissions("smt:orderoutgo:smtOrderOutgo:view")
     @RequestMapping(value = {"list", ""})
     public String list(SmtOrderOutgo smtOrderOutgo, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -130,7 +131,7 @@ public class SmtOrderOutgoController extends BaseController {
 
         List<SmtOrderEntry> list = smtOrderEntryService.findTotalLists(smtOrderEntry);
         if (null != list && list.size() > 0) {
-            String[] titles= {"客户名称", "产品型号", "订单号", "产品类型","数量","入库时间", "备注"}; // 标题
+            String[] titles = {"客户名称", "产品型号", "订单号", "产品类型", "数量", "入库时间", "备注"}; // 标题
             List<Map<String, Object>> datas = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 Map<String, Object> data = new LinkedHashMap<>();
@@ -138,14 +139,14 @@ public class SmtOrderOutgoController extends BaseController {
                 data.put("a", entry.getCustomerName());
                 data.put("b", entry.getProductNo());
                 data.put("c", entry.getOrderNo());
-                data.put("d", Integer.valueOf(entry.getProductType())==1?"FPC":"电子料");
+                data.put("d", Integer.valueOf(entry.getProductType()) == 1 ? "FPC" : "电子料");
                 data.put("e", Integer.valueOf(entry.getCounts()));
                 data.put("f", entry.getCreateDate());
                 data.put("g", entry.getRemarks());
                 datas.add(data);
 
             }
-            Object[] keys = {"a", "b", "c", "d", "e", "f","g"};
+            Object[] keys = {"a", "b", "c", "d", "e", "f", "g"};
             XSSFExcel excel = (XSSFExcel) ExcelFactory.createExcel(3, titles, datas, keys);
             try {
                 excel.export(response.getOutputStream());
@@ -156,8 +157,8 @@ public class SmtOrderOutgoController extends BaseController {
             }
         }
     }
-    
-    
+
+
     /**
      * 产品出货加载入库订单信息  ----电子料
      *
@@ -195,14 +196,14 @@ public class SmtOrderOutgoController extends BaseController {
         smtOrderEntry.setProductType("2");
         List<SmtOrderEntry> list = smtOrderEntryService.findTotalDzlLists(smtOrderEntry);
         if (null != list && list.size() > 0) {
-            String[] titles = {"客户名称", "产品型号", "产品类型","数量"}; // 标题
+            String[] titles = {"客户名称", "产品型号", "产品类型", "数量"}; // 标题
             List<Map<String, Object>> datas = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 Map<String, Object> data = new LinkedHashMap<>();
                 SmtOrderEntry entry = list.get(i);
                 data.put("a", entry.getCustomerName());
                 data.put("b", entry.getProductNo());
-                data.put("c", Integer.valueOf(entry.getProductType())==1?"FPC":"电子料");
+                data.put("c", Integer.valueOf(entry.getProductType()) == 1 ? "FPC" : "电子料");
                 data.put("d", Integer.valueOf(entry.getCounts()));
                 datas.add(data);
 
@@ -221,7 +222,7 @@ public class SmtOrderOutgoController extends BaseController {
 
     @RequiresPermissions("smt:orderentry:smtOrderEntry:view")
     @RequestMapping("/return_goods")
-    public String return_goods_list(SmtOrderEntry smtOrderEntry, HttpServletRequest request, HttpServletResponse response, Model model){
+    public String return_goods_list(SmtOrderEntry smtOrderEntry, HttpServletRequest request, HttpServletResponse response, Model model) {
         Page<SmtOrderEntry> page = smtOrderEntryService.findReturnGoods(new Page<SmtOrderEntry>(request, response), smtOrderEntry);
         model.addAttribute("page", page);
         model.addAttribute("custList", getCustomerList());
@@ -267,6 +268,14 @@ public class SmtOrderOutgoController extends BaseController {
         model.addAttribute("page", page);
         model.addAttribute("smtOrderOutgoDzl", smtOrderOutgoDzl);
         model.addAttribute("custList", getCustomerList());
+        
+        if (StringUtils.isNotBlank(smtOrderOutgoDzl.getStartDate())){
+            model.addAttribute("startDate", DateUtils.parseDate(smtOrderOutgoDzl.getStartDate()));
+        }
+        if (StringUtils.isNotBlank(smtOrderOutgoDzl.getEndDate())){
+            model.addAttribute("endDate", DateUtils.parseDate(smtOrderOutgoDzl.getEndDate()));
+        }
+        
         return "modules/smt/orderoutgodzl/smtOrderOutgoDzlList";
     }
 
@@ -299,8 +308,9 @@ public class SmtOrderOutgoController extends BaseController {
         //通过客户编码和产品型号查询对应的客户电子料信息
         List<SmtOrderDzlbom> detail = smtOrderDzlbomService.findDzlDetail(smtOrderOutgo.getCustomerNo(), smtOrderOutgo.getProductNo());
         for (SmtOrderDzlbom smtOrderDzlbom : detail) {
+            int sp = Integer.valueOf(smtOrderDzlbom.getCounts());
             smtOrderDzlbom.setCounts(String.valueOf(Integer.valueOf(smtOrderDzlbom.getCounts()) * smtOrderOutgo.getCounts()));
-            double sc = Double.valueOf(smtOrderDzlbom.getStockCounts()) / 1000 * smtOrderOutgo.getCounts();
+            double sc = Double.valueOf(smtOrderDzlbom.getStockCounts()) / 1000 * smtOrderOutgo.getCounts() * sp;
             smtOrderDzlbom.setStockCounts(String.valueOf(Math.round(sc)));
         }
         return JSON.toJSONString(detail);
@@ -358,12 +368,12 @@ public class SmtOrderOutgoController extends BaseController {
             map.put("orderNo", smtOrderOutgo.getOrderNo());
             map.put("createUser", UserUtils.getUser().getName());
 
-            int size=24-jsonArray.size();
+            int size = 24 - jsonArray.size();
             List<OutGoVO> outGoVOS = new ArrayList<>();
             if (jsonArray.size() < 24) {
                 for (int i = 0; i < size; i++) {
                     OutGoVO vo = new OutGoVO();
-                    vo.setIndex(String.valueOf(jsonArray.size()+i));
+                    vo.setIndex(String.valueOf(jsonArray.size() + i));
                     vo.setBomName("");
                     vo.setBomType("");
                     vo.setCounts("");
@@ -372,18 +382,18 @@ public class SmtOrderOutgoController extends BaseController {
                 }
             }
 
-            for (int i = 0; i <12 ; i++) {
+            for (int i = 0; i < 12; i++) {
                 OutGoVO vo = new OutGoVO();
-                vo.setIndex(String.valueOf(i+1));
+                vo.setIndex(String.valueOf(i + 1));
                 vo.setBomName(((JSONObject) jsonArray.get(i)).get("bomName").toString());
                 vo.setBomType(((JSONObject) jsonArray.get(i)).get("bomType").toString());
                 vo.setCounts(((JSONObject) jsonArray.get(i)).get("counts").toString());
                 vo.setStockCounts(((JSONObject) jsonArray.get(i)).get("stockCounts").toString());
-                vo.setIndexs(String.valueOf(13+i));
-                vo.setBomNames(((JSONObject) jsonArray.get(12+i)).get("bomName").toString());
-                vo.setBomTypes(((JSONObject) jsonArray.get(12+i)).get("bomType").toString());
-                vo.setCountss(((JSONObject) jsonArray.get(12+i)).get("counts").toString());
-                vo.setStockCountss(((JSONObject) jsonArray.get(12+i)).get("stockCounts").toString());
+                vo.setIndexs(String.valueOf(13 + i));
+                vo.setBomNames(((JSONObject) jsonArray.get(12 + i)).get("bomName").toString());
+                vo.setBomTypes(((JSONObject) jsonArray.get(12 + i)).get("bomType").toString());
+                vo.setCountss(((JSONObject) jsonArray.get(12 + i)).get("counts").toString());
+                vo.setStockCountss(((JSONObject) jsonArray.get(12 + i)).get("stockCounts").toString());
                 outGoVOS.add(vo);
             }
             maps = map;
@@ -397,6 +407,74 @@ public class SmtOrderOutgoController extends BaseController {
         }
         return state;
     }
+
+
+    /**
+     * FPC出货列表重新打印PDF
+     * @param response
+     */
+    @RequestMapping("/reprint_outgo")
+    @ResponseBody
+    public void reprint_outgo(HttpServletResponse response,String outgoOrderNo){
+        List<SmtOrderOutgoVO> outgoList = smtOrderOutgoService.selectByOutGoOrderNo(outgoOrderNo);
+        SmtOrderOutgoVO outgoVO = outgoList.get(0);
+
+        List<SmtOrderOutgoDzl> dzlList = smtOrderOutgoDzlService.selectByOutGoId(outgoVO.getId());
+        dzlList.forEach(x->{
+            x.setBomName(x.getDzlId());
+            x.setBomType("电子料");
+        });
+        Map<String, Object> map = new HashMap<>();
+        map.put("address", "东莞市长安镇锦富路29号");
+        map.put("phone", "18588206782");
+        map.put("customerName", outgoVO.getCustomerName());
+        map.put("sendNo", outgoVO.getOutgoOrderNo());
+        map.put("productNo", outgoVO.getProductNo());
+        map.put("fpcCounts", String.valueOf(outgoVO.getCounts()));
+        map.put("pointCounts", String.valueOf(outgoVO.getPointCounts()));
+        map.put("createDate", DateUtils.formatDate(outgoVO.getCreateDate(), "yyyy-MM-dd"));
+        map.put("orderNo", outgoVO.getOrderNo());
+        map.put("createUser",outgoVO.getCreateByName());
+        
+        
+        int size = 24 - dzlList.size();
+        List<SmtOrderOutgoDzl> outGoVOS = new ArrayList<>();
+        if (dzlList.size() < 24) {
+            for (int i = 0; i < size; i++) {
+                SmtOrderOutgoDzl vo = new SmtOrderOutgoDzl();
+                vo.setIndex(String.valueOf(dzlList.size() + i));
+                vo.setBomName("");
+                vo.setBomType("");
+                vo.setCounts("");
+                vo.setStockCounts("");
+                dzlList.add(vo);
+            }
+        }
+
+        for (int i = 0; i < 12; i++) {
+            SmtOrderOutgoDzl vo = new SmtOrderOutgoDzl();
+            vo.setIndex(String.valueOf(i + 1));
+            vo.setBomName(dzlList.get(i).getBomName());
+            vo.setBomType(dzlList.get(i).getBomType());
+            vo.setCounts(dzlList.get(i).getCounts());
+            vo.setStockCounts(dzlList.get(i).getStockCounts());
+            vo.setIndexs(String.valueOf(13+i));
+            vo.setBomNames((dzlList.get(12 + i)).getBomName());
+            vo.setBomTypes((dzlList.get(12 + i)).getBomType());
+            vo.setCountss((dzlList.get(12 + i)).getCounts());
+            vo.setStockCountss(dzlList.get(12 + i).getStockCounts());
+            outGoVOS.add(vo);
+        }
+        
+        try {
+            log.info("jasper文件路径：" + jasperPath);
+            demo(response, map, outGoVOS, jasperPath);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
 
     /**
      * 新版本的打印信息
@@ -412,8 +490,10 @@ public class SmtOrderOutgoController extends BaseController {
 //    }
     @RequestMapping(value = "print")
     @ResponseBody
-    public void test() {
+    public String test() {
+        log.info("jasper文件路径：" + jasperPath);
         demo(responses, maps, outGoVOList, jasperPath);
+        return null;
     }
 
 
@@ -451,6 +531,7 @@ public class SmtOrderOutgoController extends BaseController {
 
     /**
      * 撤销退货
+     *
      * @param smtOrderOutgo
      * @param redirectAttributes
      * @return
@@ -471,12 +552,13 @@ public class SmtOrderOutgoController extends BaseController {
 
     /**
      * 已退货列表信息
+     *
      * @param smtOrderOutgo
      * @return
      */
     @RequiresPermissions("smt:orderoutgo:smtOrderOutgo:view")
     @RequestMapping(value = "return_goods_lists")
-    public String return_goods_lists(SmtOrderOutgo smtOrderOutgo,Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String return_goods_lists(SmtOrderOutgo smtOrderOutgo, Model model, HttpServletRequest request, HttpServletResponse response) {
         Page<SmtOrderOutgo> page = smtOrderOutgoService.findReturnGoodsPage(new Page<SmtOrderOutgo>(request, response), smtOrderOutgo);
         model.addAttribute("page", page);
         model.addAttribute("smtOrderOutgo", smtOrderOutgo);
@@ -484,6 +566,55 @@ public class SmtOrderOutgoController extends BaseController {
         return "modules/smt/orderoutgodzl/smtOutgoReturnGoodsList";
     }
 
-    
+
+    /**
+     * 导出数据
+     * @param outgoDzl
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "btnDzlExport")
+    public String btnExport(SmtOrderOutgoDzl outgoDzl,HttpServletResponse response) {
+        // 告知类型为excel文件
+        response.setContentType("application/vnd.ms-excel"); 
+        response.setCharacterEncoding("utf-8");
+        try {
+            response.setHeader("Content-disposition", "attachment;filename=" + new String("电子料出货列表".getBytes("utf-8"), "ISO8859-1") + ".xlsx");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        List<Map<String, Object>> datas = new ArrayList<>();
+        
+        List<SmtOrderOutgoDzl> list = smtOrderOutgoService.export(outgoDzl);
+        
+        String[] titles = {"序号", "客户", "物料型号", "物料类型","出货日期","出货单号", "产品型号","FPC出货", "用量", "出货数量", "备品", "备注"}; // 标题
+        if (null != list && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Map<String, Object> data = new LinkedHashMap<>();
+                SmtOrderOutgoDzl go = list.get(i);
+                data.put("a",i+1);
+                data.put("b",go.getCustomerName());
+                data.put("c",go.getBomName());
+                data.put("d",go.getBomType());
+                data.put("e",go.getCreateDate());
+                data.put("f",go.getOutgoOrderNo());
+                data.put("g",go.getProductNo());
+                data.put("h",go.getFpcCounts());
+                data.put("i",go.getCustBomCount());
+                data.put("j",go.getCounts());
+                data.put("k",go.getStockCounts());
+                data.put("l",go.getRemarks());
+                datas.add(data);
+            }
+        }
+        Object[] keys = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k","l"};
+        try {
+            XSSFExcel excel = (XSSFExcel) ExcelFactory.createExcel(3, titles, datas, keys);
+            excel.export(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "modules/smt/orderoutgodzl/smtOrderOutgoDzlList";
+    }
     
 }

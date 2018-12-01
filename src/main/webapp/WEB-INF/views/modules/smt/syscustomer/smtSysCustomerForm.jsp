@@ -30,7 +30,7 @@
 		<li class="active"><a href="${ctx}/smt/syscustomer/smtSysCustomer/form?id=${smtSysCustomer.id}">客户信息<shiro:hasPermission name="smt:syscustomer:smtSysCustomer:edit">${not empty smtSysCustomer.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="smt:syscustomer:smtSysCustomer:edit">查看</shiro:lacksPermission></a></li>
         <li><a href="${ctx}/smt/syscustomer/smtSysCustomer/">客户信息列表</a></li>
     </ul><br/>
-	<form:form id="inputForm" modelAttribute="smtSysCustomer" action="${ctx}/smt/syscustomer/smtSysCustomer/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="smtSysCustomer" action="${ctx}/smt/syscustomer/smtSysCustomer/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">

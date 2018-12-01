@@ -13,12 +13,11 @@ import com.thinkgem.jeesite.common.utils.export.excel.XSSFExcel;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.smt.entity.ordercustbom.SmtOrderCustbom;
 import com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry;
-import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.OutGoVO;
+import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.BomList;
 import com.thinkgem.jeesite.modules.smt.entity.syscustomer.SmtSysCustomer;
 import com.thinkgem.jeesite.modules.smt.service.ordercustbom.SmtOrderCustbomService;
 import com.thinkgem.jeesite.modules.smt.service.orderentry.SmtOrderEntryService;
 import com.thinkgem.jeesite.modules.smt.service.syscustomer.SmtSysCustomerService;
-import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -270,34 +269,35 @@ public class SmtOrderEntryController extends BaseController {
     @RequestMapping(value = "test")
     public void test(HttpServletResponse response) {
         Map<String, Object> map = new HashMap<>();
-        map.put("address", "东莞市长安镇锦富路92号");
-        map.put("phone", "18588206782");
-        map.put("customerName", "腾盛宇");
-        map.put("sendNo", "2018072811122");
-        map.put("productNo", "3339DPA");
-        map.put("fpcCounts", "48562");
-        map.put("pointCounts", "7451212");
-        map.put("createDate", DateUtils.formatDateTime(new Date()));
-        map.put("orderNo", "10086");
-        map.put("createUser", UserUtils.getUser().getName());
-
-        List<OutGoVO> lists = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            OutGoVO user = new OutGoVO();
-            user.setIndex("1" + i);
-            user.setIndexs("11" + i);
-            user.setBomName("WU85421V10" + i);
-            user.setBomNames("WU85421V21" + i);
-            user.setBomType("电灯泡" + i);
-            user.setBomTypes("电灯泡s" + i);
-            user.setCounts("147258" + i);
-            user.setCountss("258369" + i);
-            user.setStockCounts("520" + i);
-            user.setStockCountss("520s" + i);
-            lists.add(user);
+        map.put("customerName", "腾xx");
+        map.put("productNo", "3338DPA");
+        map.put("createTime", DateUtils.formatDateTime(new Date()));
+        
+        List<BomList> lists = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            BomList list = new BomList();
+            list.setIndex(String.valueOf(i));
+            list.setBomName("张三"+i);
+            lists.add(list);
         }
-        String jasperPath = "F:\\outgo.jasper";
+        String jasperPath = "F:\\custbomlist.jasper";
         demo(response, map, lists, jasperPath);
     }
+    
+    
+    /**
+     * 入库列表根据入库单号查询弹窗
+     * @param orderNo
+     * @return
+     */
+    @RequiresPermissions("smt:orderentry:smtOrderEntry:view")
+    @RequestMapping("/selectOrderEntryModal")
+    @ResponseBody
+    public List<SmtOrderEntry> selectOrderEntryModal(String orderNo) {
+        List<SmtOrderEntry> entryList = smtOrderEntryService.selectByOrderNo(orderNo);
+        return entryList;
+    }
+    
+   
 
 }

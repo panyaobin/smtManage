@@ -118,15 +118,25 @@
         LEFT JOIN smt_sys_customer b on a.customer_no=b.customer_no
     </sql>
 
-    <select id="get" resultType="SmtOrderEntry">
+    <select id="get" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
         SELECT
         <include refid="smtOrderEntryColumns_list"/>
         FROM smt_order_entry a
         <include refid="smtOrderEntryJoins"/>
         WHERE a.id = #{id}
     </select>
+    
+    <!--根据订单号查询入库信息-->
+    <select id="selectByOrderNo" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
+        SELECT
+        <include refid="smtOrderEntryColumns_list"/>
+        FROM smt_order_entry a
+        <include refid="smtOrderEntryJoins"/>
+        WHERE a.order_no = #{orderNo}
+        and a.del_flag  = '0'
+    </select>
 
-    <select id="findList" resultType="SmtOrderEntry">
+    <select id="findList" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
         SELECT
         <include refid="smtOrderEntryColumns_list_total"/>
         FROM smt_order_entry a
@@ -245,7 +255,7 @@
         </choose>
         ) ff
         where ff.counts != 0
-
+        ORDER BY ff.productNo
     </select>
 
     <!--这里是入库列表查看需要统计数据的列表SQL-->
@@ -376,7 +386,7 @@
             AND q.order_no = w.order_no 
             AND q.product_no = w.product_no
             LEFT JOIN smt_sys_customer b ON q.customer_no = b.customer_no
-            LEFT join smt_order_custbom bom on q.customer_no =bom.customer_no and q.product_no =bom.product_no
+            LEFT join smt_order_custbom bom on q.customer_no =bom.customer_no and q.product_no =bom.product_no  and bom.del_flag = 0
         WHERE
 	      q.id = #{id}
     </select>
@@ -470,96 +480,11 @@
     <select id="findReturnGoodsList" resultType="com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry">
         SELECT
         *
-        FROM
-        (
-        SELECT
-        q.id AS "id",
-        q.order_no AS "orderNo",
-        q.order_date AS "orderDate",
-        q.customer_no AS "customerNo",
-        b.customer_name AS "customerName",
-        q.product_no AS "productNo",
-        q.product_type AS "productType",
-        q.counts - IFNULL( w.goCounts, 0 ) AS "counts",
-        q.create_date AS "createDate",
-        q.create_by AS "createBy.id",
-        q.update_date AS "updateDate",
-        q.update_by AS "updateBy.id",
-        q.remarks AS "remarks",
-        q.del_flag AS "delFlag"
-        FROM
-        (
-        SELECT
-        a.id,
-        a.order_no,
-        a.order_date,
-        a.customer_no,
-        b.customer_name,
-        a.product_no,
-        a.product_type,
-        a.counts,
-        a.create_date,
-        a.create_by,
-        a.update_date,
-        a.update_by,
-        a.remarks,
-        a.del_flag
-        FROM
-        smt_order_entry a
-        LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
-        WHERE
-        1 = 1
-        AND a.product_type = 1
-        AND a.del_flag = 0
-        ) q
-        LEFT JOIN (
-        SELECT
-        go.id,
-        go.customer_no,
-        go.product_no,
-        go.order_no,
-        sum( go.counts ) AS "goCounts",
-        go.point_counts,
-        go.outgo_order_no,
-        go.product_type,
-        go.create_date
-        FROM
-        smt_order_outgo go
-        WHERE
-        del_flag = 0
-        GROUP BY
-        customer_no,
-        order_no,
-        product_no
-        ) w ON q.customer_no = w.customer_no
-        AND q.order_no = w.order_no
-        AND q.product_no = w.product_no
-        LEFT JOIN smt_sys_customer b ON q.customer_no = b.customer_no UNION ALL
-        SELECT distinct
-        entry.id AS "id",
-        entry.order_no AS "orderNo",
-        entry.order_date AS "orderDate",
-        entry.customer_no AS "customerNo",
-        b.customer_name AS "customerName",
-        entry.product_no AS "productNo",
-        entry.product_type AS "productType",
-        entry.counts - IFNULL( c.counts, 0 ) AS "counts",
-        entry.create_date AS "createDate",
-        entry.create_by AS "createBy.id",
-        entry.update_date AS "updateDate",
-        entry.update_by AS "updateBy.id",
-        entry.remarks AS "remarks",
-        entry.del_flag AS "delFlag"
-        FROM
-        smt_order_entry entry
-        LEFT JOIN smt_sys_customer b ON entry.customer_no = b.customer_no
-        LEFT JOIN smt_order_outgo c ON entry.customer_no = c.customer_no
-        AND entry.order_no = c.order_no and entry.product_no=c.product_no
-        AND c.del_flag = 0
-        WHERE
-        entry.product_type = 2
-        AND entry.del_flag = 0
-        ) goods
+        from
+        ((SELECT q.id,q.order_no as "orderNo",q.customer_no AS "customerNo", b.customer_name AS "customerName", q.product_no AS "productNo", q.product_type AS "productType", q.counts - IFNULL( w.goCounts, 0 ) AS "counts"
+        FROM ( SELECT a.id, a.order_no, a.order_date, a.customer_no, b.customer_name, a.product_no, a.product_type, a.counts, a.create_date, a.create_by, a.update_date, a.update_by, a.remarks, a.del_flag FROM smt_order_entry a LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no WHERE 1 = 1 AND a.product_type = 1 AND a.del_flag = 0 ) q LEFT JOIN ( SELECT go.id, go.customer_no, go.product_no, go.order_no, sum( go.counts ) AS "goCounts", go.point_counts, go.outgo_order_no, go.product_type, go.create_date FROM smt_order_outgo go WHERE del_flag = 0 GROUP BY customer_no, order_no, product_no ) w ON q.customer_no = w.customer_no AND q.order_no = w.order_no AND q.product_no = w.product_no LEFT JOIN smt_sys_customer b ON q.customer_no = b.customer_no where q.counts - IFNULL( w.goCounts, 0 )!=0 )
+        union all
+        (SELECT kk.id,kk.orderNo,kk.customerNo, kk.customerName, kk.productNo, kk.productType, kk.counts - IFNULL(sum(gg.counts), 0 )-IFNULL(sum(gg.stock_counts),0) AS "counts" FROM ( SELECT oe.id,oe.orderNo,oe.customerNo, oe.customerName, oe.productNo, oe.productType, sum( oe.counts ) AS "counts" FROM ( SELECT a.id AS "id", a.order_no AS "orderNo", a.order_date AS "orderDate", a.customer_no AS "customerNo", b.customer_name AS "customerName", a.product_no AS "productNo", a.product_type AS "productType", a.counts - IFNULL( sum( c.counts ), 0 ) AS "counts", a.package_size AS "packageSize", a.create_date AS "createDate", a.create_by AS "createBy.id", a.update_date AS "updateDate", a.update_by AS "updateBy.id", a.remarks AS "remarks", a.del_flag AS "delFlag" FROM smt_order_entry a LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no LEFT JOIN smt_order_outgo c ON a.customer_no = c.customer_no AND a.order_no = c.order_no AND a.product_no = c.product_no AND c.del_flag = 0 WHERE a.counts - IFNULL( c.counts, 0 ) != 0 AND a.product_type = 2 AND a.del_flag = 0 GROUP BY a.customer_no, a.product_no, a.order_no ) oe WHERE oe.delFlag = 0 GROUP BY oe.customerNo, oe.productNo ) kk left join smt_order_outgo_dzl gg on kk.customerNo=gg.customer_no and kk.productNo=gg.dzl_id and gg.del_flag=0 where 1=1 GROUP BY kk.productNo,kk.customerNo ))  goods
         where goods.counts!=0
         <if test="customerNo!=null and customerNo!=''">
             and goods.customerNo LIKE '%${customerNo}%'
@@ -573,6 +498,7 @@
         <if test="id!=null and id!=''">
             and goods.id in (${id})
         </if>
+        ORDER BY goods.productNo
     </select>
 
     <!--电子料待出货列表-->
@@ -582,8 +508,9 @@
         kk.customerName,
         kk.productNo,
         kk.productType,
-        IFNULL(gg.counts, 0) as "outCount",
-        kk.counts-IFNULL(gg.counts, 0) as "counts"
+        IFNULL( sum(gg.counts), 0 ) AS "outCount",
+        IFNULL(sum(gg.stock_counts),0) as stockCounts,
+        kk.counts - IFNULL(sum(gg.counts), 0 )-IFNULL(sum(gg.stock_counts),0) AS "counts"
         FROM
         (
         SELECT
@@ -642,6 +569,7 @@
         <if test="productNo!=null and productNo!=''">
             and kk.productNo LIKE '%${productNo}%'
         </if>
+        GROUP BY kk.productNo,kk.customerNo
         <choose>
             <when test="page !=null and page.orderBy != null and page.orderBy != ''">
                 ORDER BY ${page.orderBy}

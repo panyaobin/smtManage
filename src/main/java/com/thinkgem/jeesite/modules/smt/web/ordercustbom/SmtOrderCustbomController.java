@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSON;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.utils.export.excel.ExcelFactory;
+import com.thinkgem.jeesite.common.utils.export.excel.XSSFExcel;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.smt.entity.ordercustbom.SmtOrderCustbom;
 import com.thinkgem.jeesite.modules.smt.entity.ordercustbomdetail.SmtOrderCustbomDetail;
@@ -28,7 +30,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 客户BOMController
@@ -66,8 +73,8 @@ public class SmtOrderCustbomController extends BaseController {
     public String list(SmtOrderCustbom smtOrderCustbom, HttpServletRequest request, HttpServletResponse response, Model model) {
         Page<SmtOrderCustbom> page = smtOrderCustbomService.findPage(new Page<SmtOrderCustbom>(request, response), smtOrderCustbom);
         model.addAttribute("page", page);
-        model.addAttribute("custList",getCustomerList());
-        model.addAttribute("smtOrderCustbom",smtOrderCustbom);
+        model.addAttribute("custList", getCustomerList());
+        model.addAttribute("smtOrderCustbom", smtOrderCustbom);
         return "modules/smt/ordercustbom/smtOrderCustbomList";
     }
 
@@ -200,7 +207,7 @@ public class SmtOrderCustbomController extends BaseController {
     public String validateProductNo(String productNo, String customerNo) {
         String tip = "";
         if (StringUtils.isNotBlank(productNo) && StringUtils.isNotBlank(customerNo)) {
-            int i = smtOrderCustbomService.validateProductNo(productNo,customerNo);
+            int i = smtOrderCustbomService.validateProductNo(productNo, customerNo);
             if (i > 0) {
                 tip = "型号已存在!";
             }
@@ -210,4 +217,69 @@ public class SmtOrderCustbomController extends BaseController {
         return tip;
     }
 
+    /**
+     * 客户bom详情，所有数据
+     *
+     * @param smtOrderCustbom
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("smt:ordercustbom:smtOrderCustbom:view")
+    @RequestMapping(value = "smtOrderCustbomDetail")
+    public String smtOrderCustbomDetail(SmtOrderCustbom smtOrderCustbom, HttpServletRequest request, HttpServletResponse response, Model model) {
+        Page<SmtOrderCustbom> page = smtOrderCustbomService.findOrderCustBomListWithDetail(new Page<SmtOrderCustbom>(request, response), smtOrderCustbom);
+        model.addAttribute("page", page);
+        model.addAttribute("custList", getCustomerList());
+        model.addAttribute("smtOrderCustbom", smtOrderCustbom);
+        return "modules/smt/ordercustbom/smtOrderCustbomDetail";
+    }
+
+    /**
+     * 导出数据
+     * @param smtOrderCustbom
+     * @param response
+     * @return
+     */
+    @RequiresPermissions("smt:ordercustbom:smtOrderCustbom:view")
+    @RequestMapping(value = "btnExport")
+    public String btnExport(SmtOrderCustbom smtOrderCustbom,HttpServletResponse response) {
+        response.setContentType("application/vnd.ms-excel"); // 告知类型为excel文件
+        response.setCharacterEncoding("utf-8");
+        try {
+            response.setHeader("Content-disposition", "attachment;filename=" + new String("客户BOM列表".getBytes("utf-8"), "ISO8859-1") + ".xlsx");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        List<Map<String, Object>> datas = new ArrayList<>();
+        List<SmtOrderCustbom> list = smtOrderCustbomService.export(smtOrderCustbom);
+        String[] titles = {"序号", "客户", "产品型号", "总点数", "电子料型号", "电子料类型", "件位", "用量", "备品", "录入日期", "备注"}; // 标题
+        if (null != list && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Map<String, Object> data = new LinkedHashMap<>();
+                SmtOrderCustbom custbom = list.get(i);
+                data.put("a",i+1);
+                data.put("b",custbom.getCustomerName());
+                data.put("c",custbom.getProductNo());
+                data.put("d",custbom.getPointCounts());
+                data.put("e",custbom.getBomName());
+                data.put("f",custbom.getBomType());
+                data.put("gg",custbom.getPiecePosition());
+                data.put("h",custbom.getCounts());
+                data.put("i",custbom.getStockCounts());
+                data.put("j",custbom.getCreateDate());
+                data.put("k",custbom.getRemarks());
+                datas.add(data);
+            }
+        }
+        Object[] keys = {"a", "b", "c", "d", "e", "f", "gg", "h", "i", "j", "k"};
+        try {
+            XSSFExcel excel = (XSSFExcel) ExcelFactory.createExcel(3, titles, datas, keys);
+            excel.export(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "modules/smt/ordercustbom/smtOrderCustbomDetail";
+    }
 }

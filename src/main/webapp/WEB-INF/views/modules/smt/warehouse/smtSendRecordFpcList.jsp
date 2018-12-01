@@ -2,145 +2,173 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>smt订单入库表管理</title>
+    <title>smt主FPC发料</title>
     <meta name="decorator" content="default"/>
     <script type="text/javascript">
-        $(document).ready(function () {
-            /*全选和反选 */
-            $("input[type='checkbox'][id='ids_']").bind("click", function () {
-                if ($(this).attr("checked") == 'checked') {
-                    $("input[id^='id_']").attr("checked", true);
-                } else {
-                    $("input[id^='id_']").attr("checked", false);
-                }
-            });
+        $(function () {
+            $("#counts").focus();
+            // $("#searchForm").validate({
+            //     submitHandler: function (form) {
+            //         loading('正在提交，请稍等...');
+            //         form.submit();
+            //     },
+            //     errorContainer: "#messageBox",
+            //     errorPlacement: function (error, element) {
+            //         $("#messageBox").text("输入有误，请先更正。");
+            //         if (element.is(":checkbox") || element.is(":radio") || element.parent().is(".input-append")) {
+            //             error.appendTo(element.parent().parent());
+            //         } else {
+            //             error.insertAfter(element);
+            //         }
+            //     }
+            // });
+        })
 
-            /**
-             * 发料验证，不允许超过8条
-             */
-            $("#btnSend").bind("click",function(){
-                debugger;
-                var ids = getAllCheckId();
-                if(ids.length/2<=8){
-                    if(ids !="" && ids != null){
-                        location.href= "${ctx}/smt/orderonline/smtOrderOnline/save_record?ids="+ids+"";
-                    }else{
-                        showTip("请选择需要发料的订单！");
-                    }
-                }else {
-                    showTip("发料一次性不得超过8条!");
-                }
-            });
-
-        });
-
-        function page(n, s) {
-            $("#pageNo").val(n);
-            $("#pageSize").val(s);
-            $("#searchForm").submit();
-            return false;
-        }
-
-
-        /**
-         * 该方法用于获取所有已经选中的ID
-         */
-        function getAllCheckId() {
-            var ids = "";
-            $("input[id^='id_']:checked").each(function () {
-                ids += $(this).val() + ",";
-            });
-            return ids;
+        /*失焦验证发料数量*/
+        function validCount(obj) {
+            var counts = $(obj).val(); //输入的数量
+            var counts_tol = $(obj).parent().next().next().children().val(); //剩余总数量
+            if (parseInt(counts) > parseInt(counts_tol)) {
+                showTip("超出未发料数量，请重新输入!");
+                $(obj).val("");
+                $(obj).focus();
+            }
         }
     </script>
+    <style type="text/css">
+        table tr td input {
+            text-align: center !important;
+        }
+    </style>
 </head>
 <body>
 <ul class="nav nav-tabs">
     <shiro:hasPermission name="smt:orderentry:smtOrderEntry:view">
-        <li class="active"><a href="${ctx}/smt/orderentry/smtOrderEntry/fpc_list">主FPC仓</a></li>
+        <li><a href="${ctx}/smt/orderentry/smtOrderEntry/fpc_list">主FPC仓</a></li>
         <li><a href="${ctx}/smt/orderentry/smtOrderEntry/dzl_list">电子料仓</a></li>
+        <li><a href="${ctx}/smt/orderentry/smtOrderEntry/total_list">仓库发料</a></li>
+        <li class="active"><a href="${ctx}/smt/orderentry/smtOrderEntry/dzl_list">发料</a></li>
         <li><a href="${ctx}/smt/orderonline/smtOrderOnline/send_record">发料记录</a></li>
     </shiro:hasPermission>
 </ul>
-<form:form id="searchForm" modelAttribute="smtOrderEntry" action="${ctx}/smt/orderentry/smtOrderEntry/fpc_list" method="post" class="breadcrumb form-search">
-    <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
-    <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-    <ul class="ul-form">
-        <li style="width: 230px">客户：<select name="customerNo" id="" class="input-medium">
-            <option value="">请选择</option>
-            <c:forEach items="${custList}" var="cust">
-                <option <c:if test="${cust.customerNo==smtOrderEntry.customerNo}">selected="selected"</c:if> value="${cust.customerNo}" title="${cust.customerName}">${cust.customerName}</option>
-            </c:forEach>
-        </select>
-        </li>
-        <li>产品型号：<input type="text" name="productNo" value="${smtOrderEntry.productNo}" style="width: 50%"></li>
-        <li>订单号：<input type="text" name="orderNo" value="${smtOrderEntry.orderNo}" style="width: 50%"></li>
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-        <li class="btns"><input id="btnReset" class="btn btn-primary" type="reset" onclick="window.location.href='${ctx}/smt/orderentry/smtOrderEntry/fpc_list'" value="重置"/></li>
-        <li class="btns"><input id="btnSend" class="btn btn-primary" type="button" value="发料"/></li>
-        <li class="clearfix"></li>
-    </ul>
+<form:form id="searchForm" modelAttribute="smtOrderOnline" onkeydown="if(event.keyCode==13)return false;"  action="${ctx}/smt/orderonline/smtOrderOnline/print" method="post" class="breadcrumb form-search">
+    <table style="text-align: center;">
+        <tr style="height: 60px">
+            <td colspan="6"><h4>仓库发料</h4></td>
+        </tr>
+        <tr>
+            <td>序号</td>
+            <td>客户名称</td>
+            <td>产品型号</td>
+            <td>订单号</td>
+            <td>数量</td>
+            <td>备注</td>
+            <td>未发料</td>
+        </tr>
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[0].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[0].customerNo}">
+            <td><input type="text" value="1" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[0].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[0].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[0].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" onblur="validCount(this);" id="counts" value="" class="input-mini " required></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[0].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[1].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[1].customerNo}">
+            <td><input type="text" value="2" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[1].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[1].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[1].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[1].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[2].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[2].customerNo}">
+            <td><input type="text" value="3" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[2].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[2].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[2].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[2].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[3].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[3].customerNo}">
+            <td><input type="text" value="4" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[3].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[3].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[3].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[3].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[4].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[4].customerNo}">
+            <td><input type="text" value="5" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[4].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[4].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[4].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[4].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[5].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[5].customerNo}">
+            <td><input type="text" value="6" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[5].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[5].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[5].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[5].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[6].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[6].customerNo}">
+            <td><input type="text" value="7" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[6].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[6].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[6].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[6].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr>
+            <input type="hidden" name="productType" value="${fpcRecord[7].productType}">
+            <input type="hidden" name="customerNo" value="${fpcRecord[7].customerNo}">
+            <td><input type="text" value="8" style="width: 10px" readonly tabindex="-1"></td>
+            <td><input type="text" name="customerName" value="${fpcRecord[7].customerName}" class="input-mini" tabindex="-1" readonly></td>
+            <td><input type="text" name="productNo" value="${fpcRecord[7].productNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="orderNo" value="${fpcRecord[7].orderNo}" class="input-small" tabindex="-1" readonly></td>
+            <td><input type="text" name="counts" value="" class="input-mini"></td>
+            <td><input type="text" name="remarks" value="" class="input-small"></td>
+            <td><input type="text" value="${fpcRecord[7].counts}" tabindex="-1" readonly class="input-small"></td>
+        </tr>
+
+        <tr style="height: 50px;">
+            <td colspan="6"></td>
+            <td>
+                <input id="btnSubmit" style="float: left;" class="btn btn-primary" type="submit" value="打印"/>
+                <input id="btnCancel" class="btn" style="float: right" type="button" value="返 回" onclick="history.go(-1)"/>
+            </td>
+        </tr>
+    </table>
 </form:form>
-<sys:message content="${message}"/>
-<table id="contentTable" class="table table-striped table-bordered table-condensed">
-    <thead>
-    <tr>
-        <th style="width:3em;text-align: center"><input type="checkbox" id="ids_"></th>
-        <th>序号</th>
-        <th>客户名称</th>
-        <th>产品型号</th>
-        <th>订单号</th>
-        <th>产品类型</th>
-        <th>数量</th>
-        <th>入库时间</th>
-        <th>备注</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:if test="${page.list==null || page.list.size()<=0}">
-        <tr>
-            <td colspan="9" style="text-align: center">对不起，没有数据……</td>
-        </tr>
-    </c:if>
-    <c:forEach items="${page.list}" var="smtOrderEntry" varStatus="oe">
-        <tr>
-            <td style="text-align: center">
-                <input type="checkbox" id="id_${smtOrderEntry.id}" value="${smtOrderEntry.id}"/>
-            </td>
-            <td>
-                    ${oe.count}
-            </td>
-
-            <td>
-                    ${smtOrderEntry.customerName}
-            </td>
-
-            <td>
-                    ${smtOrderEntry.productNo}
-            </td>
-            <td>
-                    ${smtOrderEntry.orderNo}
-            </td>
-
-            <td>
-                    ${fns:getDictLabel(smtOrderEntry.productType, 'smt_product_type', '')}
-            </td>
-
-            <td>
-                    ${smtOrderEntry.counts}
-            </td>
-
-            <td>
-                <fmt:formatDate value="${smtOrderEntry.orderDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            </td>
-
-            <td>
-                    ${smtOrderEntry.remarks}
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-<div class="pagination">${page}</div>
 </body>
 </html>

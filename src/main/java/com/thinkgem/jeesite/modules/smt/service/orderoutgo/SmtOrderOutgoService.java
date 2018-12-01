@@ -9,6 +9,7 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.smt.dao.orderoutgo.SmtOrderOutgoDao;
 import com.thinkgem.jeesite.modules.smt.dao.orderoutgodzl.SmtOrderOutgoDzlDao;
 import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgo;
+import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgoVO;
 import com.thinkgem.jeesite.modules.smt.entity.orderoutgodzl.SmtOrderOutgoDzl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -83,7 +84,7 @@ public class SmtOrderOutgoService extends CrudService<SmtOrderOutgoDao, SmtOrder
             SmtOrderOutgoDzl outgoDzl = (SmtOrderOutgoDzl) JSONObject.toBean(JSONObject.fromObject(jsonArray.get(i)), SmtOrderOutgoDzl.class);
             outgoDzl.setFId(smtOrderOutgo.getId());
             outgoDzl.setDzlId(outgoDzl.getBomName());
-            outgoDzl.setCustomerNo(outgoDzl.getCustomerNo());
+            outgoDzl.setCustomerNo(smtOrderOutgo.getCustomerNo());
             outgoDzl.setId("");
             outgoDzl.preInsert();
             smtOrderOutgoDzlDao.insert(outgoDzl);
@@ -117,5 +118,25 @@ public class SmtOrderOutgoService extends CrudService<SmtOrderOutgoDao, SmtOrder
     public void to_delete(SmtOrderOutgo smtOrderOutgo){
         dao.delete(smtOrderOutgo);
         smtOrderOutgoDzlDao.cancle_outgo(smtOrderOutgo.getId());
+    }
+
+
+    /**
+     * 导出数据
+     * @param dzl
+     * @return
+     */
+    public List<SmtOrderOutgoDzl> export(SmtOrderOutgoDzl dzl){
+        return smtOrderOutgoDzlDao.findList(dzl);
+    }
+
+
+    /**
+     * 通过退货单号查询退货单
+     * @param outgoOrderNo
+     * @return
+     */
+    public List<SmtOrderOutgoVO> selectByOutGoOrderNo(String outgoOrderNo){
+        return dao.selectByOutGoOrderNo(outgoOrderNo);
     }
 }

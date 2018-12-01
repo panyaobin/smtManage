@@ -124,6 +124,44 @@
         <if test="orderNo!=null and orderNo!=''">
             and a.order_no LIKE '%${orderNo}%'
         </if>
+        ORDER BY a.create_date desc
+    </select>
+
+    <!--查询最后一次的退货单号-->
+    <select id="selectMaxOutgoOrderNo" resultType="java.lang.String">
+            SELECT
+                a.outgo_order_no
+            FROM
+                smt.smt_order_outgo a
+                LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no 
+            WHERE
+                a.outgo_order_no REGEXP '^[9]' 
+                AND a.del_flag =0 
+            ORDER BY outgo_order_no DESC
+	LIMIT 1
+        
+    </select>
+
+    <!--通过退货单号查询退货单-->
+    <select id="selectByOutGoOrderNo" resultType="com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgoVO">
+          SELECT
+            go.id,
+            go.customer_no as "customerNo",
+            cust.customer_name as "customerName",
+            go.outgo_order_no as "outgoOrderNo",
+            go.product_no as "productNo",
+            go.product_type as "productType",
+            go.point_counts as "pointCounts",
+            go.order_no as "orderNo",
+            go.counts,
+            go.remarks,
+            user.`name` as "createByName",
+            go.create_date as "createDate"
+        FROM
+            smt_order_outgo  go
+            left join smt_sys_customer cust on cust.customer_no = go.customer_no
+            left join sys_user user on user.id = go.create_by
+            where go.outgo_order_no = #{outgoOrderNo}
     </select>
 
 

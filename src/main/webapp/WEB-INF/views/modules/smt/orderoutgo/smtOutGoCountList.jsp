@@ -2,12 +2,39 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>smt订单入库表管理</title>
+    <title>FPC出货</title>
     <meta name="decorator" content="default"/>
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#counts").focus();
+            /*点击计算电子料消耗量*/
+            $("#calc").click(function () {
+                var counts= $("#counts").val();
 
+                if (!(/(^[1-9]\d*$)/.test(counts))) {
+                    $("#counts").focus();
+                    $("#counts").val("");
+                    showTip("请输入有效数量!");
+                    return;
+                }
+                
+                if (counts.trim()==""){
+                    showTip("请输入数量！");
+                    $("#counts").focus();
+                    return;
+                }
+                /*这里是此次出货最大数量*/
+                var total_counts=$("#totalCounts").val();
+                if (parseInt(counts) > parseInt(total_counts)){
+                    showTip("超出最大出货量!");
+                    $("#counts").focus();
+                    $("#counts").val("");
+                    return;
+                } 
+                loadTable();
+            })
         });
+
 
         function page(n, s) {
             $("#pageNo").val(n);
@@ -15,98 +42,183 @@
             $("#searchForm").submit();
             return false;
         }
+
+        function queryParams() {
+            var custNo = $("#customerNo").val();
+            var proNo = $("#productNo").val();
+            var counts= $("#counts").val();
+            var data = {"productNo": proNo, "customerNo": custNo,"counts":counts};
+            return data;
+        }
+
+        function rowIndexFormatter(value, row, index) {
+            return ++index;
+        }
+
+        function loadTable() {
+            $("#dzlUseCounts").bootstrapTable('destroy');
+            var $table = $('#dzlUseCounts').bootstrapTable({
+                url: '${ctx}/smt/orderoutgo/smtOrderOutgo/search',  /// /请求后台的URL（*）
+                method: 'post',                      /// /请求方式（*）
+                //toolbar: '#wmsRoHeader_table_toolbar_id',     /// /工具按钮用哪个容器
+                striped: true,                      /// /是否显示行间隔色
+                cache: false,                       /// /是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: false,                   /// /是否显示分页（*）
+                sortable: true,                     /// /是否启用排序
+                sortOrder: "asc",                   /// /排序方式
+                queryParams: queryParams,/// /传递参数（*）
+                sidePagination: "server",           /// /分页方式：client客户端分页，server服务端分页（*）
+                pageNumber: 1,                       /// /初始化加载第一页，默认第一页
+                pageSize: 10,                       /// /每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        /// /可供选择的每页的行数（*）
+                search: false,                       /// /是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                strictSearch: false,
+                showColumns: false,                  /// /是否显示所有的列
+                showExport: false, 						//显示导出按钮
+                showRefresh: false,                  /// /是否显示刷新按钮
+                clickToSelect: false,                /// /是否启用点击选中行 /// 行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                contentType: "application/x-www-form-urlencoded",
+                uniqueId: "id",                     /// /每一行的唯一标识，一般为主键列
+                showToggle: false,                    /// /是否显示详细视图和列表视图的切换按钮
+                cardView: false,                    /// /是否显示详细视图
+                detailView: false,                   /// /是否显示父子表
+                resizable: true,      //设置table可以调整列宽
+                responseHandler:function (res) {
+                    return {total:res.length,rows:res};
+                },
+                columns: [{
+                    title: "序号",
+                    width: '50px',
+                    formatter: rowIndexFormatter,
+                    align: 'center',
+                    valing: 'middle'
+                },{
+                        field: "id",
+                        title: "电子料BOM_ID",
+                        titleTooltip: "电子料BOM_ID",
+                        align: 'center',
+                        valing: 'middle'
+                    },{
+                        field: "bomName",
+                        title: "电子料型号",
+                        titleTooltip: "电子料型号",
+                        align: 'center',
+                        valing: 'middle'
+                    }, {
+                        field: "bomType",
+                        title: "电子料类型",
+                        titleTooltip: "电子料类型",
+                        align: 'center',
+                        valing: 'middle'
+                    },
+                    {
+                        field: 'counts',
+                        title: "总用量",
+                        titleTooltip: "总用量",
+                        align: 'center',
+                        valing: 'middle'
+                    },
+                    {
+                        field: 'stockCounts',
+                        title: "备品数量",
+                        titleTooltip: "备品数量",
+                        align: 'center',
+                        valing: 'middle'
+                    },
+                    {
+                        field: 'remarks',
+                        title: "备注",
+                        titleTooltip: "备注",
+                        align: 'center',
+                        valing: 'middle'
+                    }
+
+                ]
+            });
+        }
+        
+        /*提交表单是获取数据*/
+        function checkInfo() {
+            var counts=$("#counts").val();
+            if (counts.trim()==""){
+                showTip("请输入出货数量!")
+                return;
+            } 
+            var rows = $('#dzlUseCounts').bootstrapTable("getData");
+            
+            var arr=[];
+            for (var i = 0; i <rows.length ; i++) {
+                var memo={"id":rows[i].id,"bomName":rows[i].bomName,"bomType":rows[i].bomType,"counts":rows[i].counts,"stockCounts":rows[i].stockCounts};
+                arr.push(memo);
+            }
+            var productType=$("#productType").val();
+            var pointCounts=$("#pointCounts").val();
+            var customerNo=$("#customerNo").val();
+            var customerName=$("#customerName").val();
+            var productNo=$("#productNo").val();
+            var orderNo=$("#orderNo").val();
+            var counts=$("#counts").val();
+            <%--$.get("${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_save",{"rows":JSON.stringify(arr),"productType":productType,"pointCounts":pointCounts,"customerNo":customerNo,"productNo":productNo,"orderNo":orderNo,"counts":counts},"application/json");--%>
+            $.ajax({
+                url:"${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_save",
+                type:"GET",
+                contentType: "application/json",
+                data:{"rows":JSON.stringify(arr),"productType":productType,"pointCounts":pointCounts,"customerNo":customerNo,"customerName":customerName,"productNo":productNo,"orderNo":orderNo,"counts":counts},
+                success:function (msg) {
+                    if(msg=="success"){
+                        showTip("出货成功!");
+                        window.location.href="${ctx}/smt/orderoutgo/smtOrderOutgo/print";
+                    }else{
+                        showTip(msg);
+                    }
+                }
+                
+            })
+        }
     </script>
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <shiro:hasPermission name="smt:orderentry:smtOrderEntry:edit">
-        <li><a href="${ctx}/smt/orderentry/smtOrderEntry/form">订单入库添加</a></li>
+    <shiro:hasPermission name="smt:orderentry:smtOrderEntry:view">
+        <li><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/order_entry_fpc_list">在线主FPC待出货</a></li>
     </shiro:hasPermission>
-    <li class="active"><a href="${ctx}/smt/orderentry/smtOrderEntry/">订单入库列表</a></li>
+
+    <shiro:hasPermission name="smt:orderentry:smtOrderEntry:view">
+        <li class="active"><a href="">主FPC出货</a></li>
+    </shiro:hasPermission>
+
+    <shiro:hasPermission name="smt:orderentry:smtOrderEntry:view">
+        <li><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/order_entry_dzl_list">在线电子料待出货</a></li>
+    </shiro:hasPermission>
 </ul>
-<form:form id="searchForm" modelAttribute="smtOrderEntry" action="${ctx}/smt/orderentry/smtOrderEntry/" method="post" class="breadcrumb form-search">
-    <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
-    <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-    <ul class="ul-form">
-        <li style="width: 230px">客户：<select name="customerNo" id="" class="input-medium">
+<form:form id="searchForm" modelAttribute="smtOrderEntry" action="" onkeydown="if(event.keyCode==13){return false;}"  method="post" class="breadcrumb form-search">
+    <input type="hidden" name="productType" id="productType" value="${smtOrderEntry.productType}">
+    <input type="hidden" name="pointCounts" id="pointCounts" value="${smtOrderEntry.pointCounts}"> 
+    <input type="hidden" name="customerName" id="customerName" value="${smtOrderEntry.customerName}"> 
+    <table style="height: 150px">
+        <tr>
+            <td style="height: 60px;text-align: center" colspan="5"><h4>FPC出货信息</h4></td>
+        </tr>
+        <tr>
+            <td class="input-large">客户名称:<select name="customerNo" id="customerNo" class="input-small">
                 <option value="">请选择</option>
                 <c:forEach items="${custList}" var="cust">
-                    <option <c:if test="${cust.customerNo==smtOrderEntry.customerNo}">selected="selected"</c:if> value="${cust.customerNo}" title="${cust.customerName}">${cust.customerName}</option>
+                    <option
+                            <c:if test="${cust.customerNo==smtOrderEntry.customerNo}">selected="selected"</c:if> value="${cust.customerNo}" title="${cust.customerName}">${cust.customerName}</option>
                 </c:forEach>
             </select>
-        </li>
-        <li>产品型号：<input type="text" name="productNo" value="${smtOrderEntry.productNo}" style="width: 50%"></li>
-        <li>订单号：<input type="text" name="orderNo" value="${smtOrderEntry.orderNo}" style="width: 50%"></li>
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-        <li class="btns"><input id="btnReset" class="btn btn-primary" type="reset" onclick="window.location.href='${ctx}/smt/orderentry/smtOrderEntry'" value="重置"/></li>
-        <li class="clearfix"></li>
-    </ul>
+            </td>
+            <td class="input-large">产品型号：<input type="text" name="productNo" id="productNo" value="${smtOrderEntry.productNo}" class="input-mini"></td>
+            <td class="input-large">订单号：<input type="text" name="orderNo" id="orderNo" value="${smtOrderEntry.orderNo}" style="width: 50%"></td>
+            <td class="input-large">出货数量:<input type="text" name="counts" id="counts" class="input-mini" required></td>
+            <td class="input-medium">总数量:<input type="text" id="totalCounts" value="${smtOrderEntry.counts}" class="input-mini" readonly tabindex="-1"></td>
+            <td class="input-small"><input id="calc" class="btn btn-primary input-mini" type="button" value="计算电子料"/></td>
+            <td class="input-small"><input class="btn btn-primary input-mini" type="button" onclick="checkInfo();" value="出货"/></td>
+        </tr>
+    </table>
+    <table id="dzlUseCounts" style="text-align: center"></table>
 </form:form>
-<sys:message content="${message}"/>
-<table id="contentTable" class="table table-striped table-bordered table-condensed">
-    <thead>
-    <tr>
-        <th>序号</th>
-        <th>客户名称</th>
-        <th>产品型号</th>
-        <th>订单号</th>
-        <th>产品类型</th>
-        <th>数量</th>
-        <th>入库时间</th>
-        <th>备注</th>
-        <shiro:hasPermission name="smt:orderentry:smtOrderEntry:edit">
-            <th>操作</th>
-        </shiro:hasPermission>
-    </tr>
-    </thead>
-    <tbody>
-    <c:if test="${page.list==null || page.list.size()<=0}">
-        <tr>
-            <td colspan="10" style="text-align: center">对不起，没有数据……</td>
-        </tr>
-    </c:if>
-    <c:forEach items="${page.list}" var="smtOrderEntry" varStatus="oe">
-        <tr>
-            <td>
-                    ${oe.count}
-            </td>
 
-            <td>
-                    ${smtOrderEntry.customerName}
-            </td>
 
-            <td>
-                    ${smtOrderEntry.productNo}
-            </td>
-            <td>
-                    ${smtOrderEntry.orderNo}
-            </td>
-
-            <td>
-                    ${fns:getDictLabel(smtOrderEntry.productType, 'smt_product_type', '')}
-            </td>
-
-            <td>
-                    ${smtOrderEntry.counts}
-            </td>
-
-            <td>
-                <fmt:formatDate value="${smtOrderEntry.orderDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            </td>
-
-            <td>
-                    ${smtOrderEntry.remarks}
-            </td>
-            <shiro:hasPermission name="smt:orderentry:smtOrderEntry:edit">
-                <td>
-                    <%--<a href="${ctx}/smt/orderentry/smtOrderEntry/form?id=${smtOrderEntry.id}">修改</a>--%>
-                    <a href="${ctx}/smt/orderentry/smtOrderEntry/delete?id=${smtOrderEntry.id}" onclick="return confirmx('确认要删除该smt订单入库表吗？', this.href)">删除</a>
-                </td>
-            </shiro:hasPermission>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-<div class="pagination">${page}</div>
 </body>
 </html>

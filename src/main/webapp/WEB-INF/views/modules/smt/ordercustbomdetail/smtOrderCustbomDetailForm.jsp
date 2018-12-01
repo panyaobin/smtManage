@@ -30,7 +30,7 @@
 		<li><a href="${ctx}/smt/ordercustbomdetail/smtOrderCustbomDetail/">客户BOM明细表列表</a></li>
 		<li class="active"><a href="${ctx}/smt/ordercustbomdetail/smtOrderCustbomDetail/form?id=${smtOrderCustbomDetail.id}">客户BOM明细表<shiro:hasPermission name="smt:ordercustbomdetail:smtOrderCustbomDetail:edit">${not empty smtOrderCustbomDetail.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="smt:ordercustbomdetail:smtOrderCustbomDetail:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="smtOrderCustbomDetail" action="${ctx}/smt/ordercustbomdetail/smtOrderCustbomDetail/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="smtOrderCustbomDetail" action="${ctx}/smt/ordercustbomdetail/smtOrderCustbomDetail/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">

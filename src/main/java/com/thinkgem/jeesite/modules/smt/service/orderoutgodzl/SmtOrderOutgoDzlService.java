@@ -42,5 +42,15 @@ public class SmtOrderOutgoDzlService extends CrudService<SmtOrderOutgoDzlDao, Sm
 	public void delete(SmtOrderOutgoDzl smtOrderOutgoDzl) {
 		super.delete(smtOrderOutgoDzl);
 	}
+
+
+    /**
+     * 通过FPC出货编号查询电子料出货信息
+     * @param outgoId
+     * @return
+     */
+	public List<SmtOrderOutgoDzl> selectByOutGoId(String outgoId){
+	    return dao.selectByOutGoId(outgoId);
+    }
 	
 }

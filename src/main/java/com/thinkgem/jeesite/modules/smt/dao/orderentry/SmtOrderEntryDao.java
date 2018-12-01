@@ -54,4 +54,11 @@ public interface SmtOrderEntryDao extends CrudDao<SmtOrderEntry> {
      * @return
      */
     List<SmtOrderEntry> findDzlMainPage(SmtOrderEntry smtOrderEntry);
+
+    /**
+     * 根据 订单号查询
+     * @param orderNo
+     * @return
+     */
+    List<SmtOrderEntry> selectByOrderNo(@Param("orderNo") String orderNo);
 }

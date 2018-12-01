@@ -23,6 +23,7 @@ public class SmtOrderOnline extends DataEntity<SmtOrderOnline> {
 	private String productType;		// 产品类型 1.FPC 2.电子料
 	private String counts;		// 数量
 	private int sendNo;		// 数量
+    private String custBomTableData; //表格数据集合
 	
 	public SmtOrderOnline() {
 		super();
@@ -99,5 +100,13 @@ public class SmtOrderOnline extends DataEntity<SmtOrderOnline> {
 
     public void setIndex(String index) {
         this.index = index;
+    }
+
+    public String getCustBomTableData() {
+        return custBomTableData;
+    }
+
+    public void setCustBomTableData(String custBomTableData) {
+        this.custBomTableData = custBomTableData;
     }
 }

@@ -30,7 +30,7 @@
 		<li><a href="${ctx}/smt/orderoutgodzl/smtOrderOutgoDzl/">电子料出货列表</a></li>
 		<li class="active"><a href="${ctx}/smt/orderoutgodzl/smtOrderOutgoDzl/form?id=${smtOrderOutgoDzl.id}">电子料出货<shiro:hasPermission name="smt:orderoutgodzl:smtOrderOutgoDzl:edit">${not empty smtOrderOutgoDzl.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="smt:orderoutgodzl:smtOrderOutgoDzl:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="smtOrderOutgoDzl" action="${ctx}/smt/orderoutgodzl/smtOrderOutgoDzl/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="smtOrderOutgoDzl" action="${ctx}/smt/orderoutgodzl/smtOrderOutgoDzl/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">

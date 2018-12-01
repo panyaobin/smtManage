@@ -201,4 +201,34 @@ public class SmtOrderCustbomService extends CrudService<SmtOrderCustbomDao, SmtO
     public List<SmtOrderCustBomVO> findCustBomDetailById(SmtOrderCustbom bom) {
         return smtOrderCustbomDao.findCustBomDetailById(bom);
     }
+
+    /**
+     * 查询所有的客户BOM列表信息，主表带明细
+     * @param page 分页对象
+     * @param smtOrderCustbom
+     * @return
+     */
+    public Page<SmtOrderCustbom> findOrderCustBomListWithDetail(Page<SmtOrderCustbom> page, SmtOrderCustbom smtOrderCustbom) {
+        smtOrderCustbom.setPage(page);
+        page.setList(smtOrderCustbomDao.findOrderCustBomListWithDetail(smtOrderCustbom));
+        return page;
+    }
+
+    /**
+     * 导出数据，查询
+     * @param custbom
+     * @return
+     */
+    public  List<SmtOrderCustbom> export(SmtOrderCustbom custbom){
+        return smtOrderCustbomDao.findOrderCustBomListWithDetail(custbom);
+    }
+
+    /**
+     * 查询客户bom用料信息
+     * @param bom
+     * @return
+     */
+    public List<SmtOrderCustbom> findOrderCustbomList(SmtOrderCustbom bom){
+        return smtOrderCustbomDao.findOrderCustbomList(bom);
+    }
 }

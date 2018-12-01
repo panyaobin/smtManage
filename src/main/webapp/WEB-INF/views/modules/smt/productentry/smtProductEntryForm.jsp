@@ -30,7 +30,7 @@
 		<li><a href="${ctx}/smt/productentry/smtProductEntry/">成品入库表列表</a></li>
 		<li class="active"><a href="${ctx}/smt/productentry/smtProductEntry/form?id=${smtProductEntry.id}">成品入库表<shiro:hasPermission name="smt:productentry:smtProductEntry:edit">${not empty smtProductEntry.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="smt:productentry:smtProductEntry:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="smtProductEntry" action="${ctx}/smt/productentry/smtProductEntry/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="smtProductEntry" action="${ctx}/smt/productentry/smtProductEntry/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">

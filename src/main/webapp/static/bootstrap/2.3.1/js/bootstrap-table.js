@@ -484,7 +484,7 @@
             return 'Search';
         },
         formatNoMatches: function () {
-            return 'No matching records found';
+            return '加载中，请稍候.....';
         },
         formatPaginationSwitch: function () {
             return 'Hide/Show pagination';
@@ -1780,7 +1780,7 @@
         // show no records
         if (!html.length) {
             html.push('<tr class="no-records-found">',
-                sprintf('<td colspan="%s">%s</td>',
+                sprintf('<td colspan="%s" style="text-align: center">%s</td>',
                     this.$header.find('th').length, this.options.formatNoMatches()),
                 '</tr>');
         }

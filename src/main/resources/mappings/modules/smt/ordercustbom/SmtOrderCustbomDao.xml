@@ -125,6 +125,54 @@
 	      and bom.customer_no=#{customerNo}
     </select>
 
+    <!--查询所有的客户BOM列表信息，主表带明细-->
+    <select id="findOrderCustBomListWithDetail" resultType="com.thinkgem.jeesite.modules.smt.entity.ordercustbom.SmtOrderCustbom">
+        SELECT
+        cust.customer_name as customerName,
+        main.product_no as productNo,
+        main.point_counts as pointCounts,
+        db.bom_name as bomName,
+        db.bom_type as bomType,
+        detail.counts,
+        detail.piece_position as piecePosition,
+        detail.stock_counts as stockCounts,
+        detail.create_date as createDate,
+        detail.remarks
+        FROM
+        smt.smt_order_custbom_detail detail
+        left join smt.smt_order_custbom main on detail.custbom_id =main.id
+        left join smt.smt_sys_customer cust on main.customer_no =cust.customer_no
+        left join smt.smt_order_dzlbom db on db.id =detail.dzlbom_id
+
+        where main.del_flag = 0 and detail.del_flag = 0
+        <if test="customerNo!=null and customerNo!=''">
+            and main.customer_no like '%${customerNo}%'
+        </if>
+        <if test="productNo!=null and productNo!=''">
+            and main.product_no like '%${productNo}%'
+        </if>
+        <if test="bomName!=null and bomName!=''">
+            and db.bom_name like concat("%", #{bomName},"%")
+        </if>
+    </select>
+
+    <!--查询客户bom用料信息-->
+    <select id="findOrderCustbomList" resultType="com.thinkgem.jeesite.modules.smt.entity.ordercustbom.SmtOrderCustbom">
+          SELECT
+             dzlbom.id as "dzlbomId",
+             dzlbom.bom_name as "bomName",
+             dzlbom.bom_type as "bomType",
+             detail.counts,
+             detail.piece_position as "piecePosition",
+             detail.stock_counts as "stockCounts",
+             detail.remarks
+            FROM
+                smt_order_custbom_detail detail
+                LEFT JOIN smt_order_dzlbom dzlbom on detail.dzlbom_id = dzlbom.id
+            WHERE
+                detail.custbom_id = (select id from smt_order_custbom where customer_no= #{bom.customerNo} and product_no =#{bom.productNo})
+    </select>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO smt_order_custbom(
 			customer_no,

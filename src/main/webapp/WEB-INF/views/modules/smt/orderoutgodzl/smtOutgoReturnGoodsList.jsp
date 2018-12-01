@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>出货管理</title>
+    <title>已退货列表</title>
     <meta name="decorator" content="default"/>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -19,41 +19,42 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_fpc_list">FPC出货列表</a></li>
+    <li><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_fpc_list">FPC出货列表</a></li>
     <li><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_dzl_list">电子料出货列表</a></li>
-    <li><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/return_goods_lists">已退货列表</a></li>
+    <li class="active"><a href="${ctx}/smt/orderoutgo/smtOrderOutgo/return_goods_lists">退货列表</a></li>
 </ul>
-<form:form id="searchForm" modelAttribute="smtOrderOutgo" action="${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_fpc_list" method="post" class="breadcrumb form-search">
+<form:form id="searchForm" modelAttribute="smtOrderOutgo" action="${ctx}/smt/orderoutgo/smtOrderOutgo/return_goods_lists" method="post" class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
     <ul class="ul-form">
-        <li>出货单号：<input type="text" name="outgoOrderNo" value="${smtOrderOutgo.outgoOrderNo}" style="width: 50%"></li>
+        <li>退货单号：<input type="text" name="outgoOrderNo" value="${smtOrderOutgo.outgoOrderNo}" style="width: 50%"></li>
         <li style="width: 230px">客户：<select name="customerNo" id="" class="input-medium">
             <option value="">请选择</option>
             <c:forEach items="${custList}" var="cust">
-                <option <c:if test="${cust.customerNo==smtOrderOutgo.customerNo}">selected="selected"</c:if> value="${cust.customerNo}" title="${cust.customerName}">${cust.customerName}</option>
+                <option
+                        <c:if test="${cust.customerNo==smtOrderOutgo.customerNo}">selected="selected"</c:if> value="${cust.customerNo}" title="${cust.customerName}">${cust.customerName}</option>
             </c:forEach>
         </select>
         </li>
         <li>产品型号：<input type="text" name="productNo" value="${smtOrderOutgo.productNo}" style="width: 50%"></li>
         <li>订单号：<input type="text" name="orderNo" value="${smtOrderOutgo.orderNo}" style="width: 50%"></li>
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-        <li class="btns"><input id="btnReset" class="btn btn-primary" type="reset" onclick="window.location.href='${ctx}/smt/orderoutgo/smtOrderOutgo/outgo_fpc_list'" value="重置"/></li>
+        <li class="btns"><input id="btnReset" class="btn btn-primary" type="reset" onclick="window.location.href='${ctx}/smt/orderoutgo/smtOrderOutgo/return_goods_lists'" value="重置"/></li>
         <li class="clearfix"></li>
     </ul>
 </form:form>
 <sys:message content="${message}"/>
-<table id="contentTable"  class="table table-striped table-bordered table-condensed">
+<table id="contentTable" class="table table-striped table-bordered table-condensed">
     <thead>
     <tr style="text-align: center">
         <th>序号</th>
-        <th>出货单号</th>
+        <th>退货单号</th>
         <th>客户名称</th>
         <th>产品型号</th>
+        <th>产品类型</th>
         <th>订单号</th>
-        <th>出货数量</th>
-        <th>出货点数</th>
-        <th>出货时间</th>
+        <th>退货数量</th>
+        <th>退货时间</th>
         <shiro:hasPermission name="smt:orderoutgo:smtOrderOutgo:edit">
             <th>操作</th>
         </shiro:hasPermission>
@@ -71,7 +72,7 @@
                     ${out.count}
             </td>
             <td>
-                    ${smtOrderOutgo.outgoOrderNo}
+                <a href="javascript:void(0)" title="打印预览" onclick='window.location.href="${ctx}/smt/productentry/smtProductEntry/reprint?outgoOrderNo=${smtOrderOutgo.outgoOrderNo}"'>${smtOrderOutgo.outgoOrderNo}</a>
             </td>
             <td>
                     ${smtOrderOutgo.customerName}
@@ -80,13 +81,13 @@
                     ${smtOrderOutgo.productNo}
             </td>
             <td>
+                    ${fns:getDictLabel(smtOrderOutgo.productType, 'smt_product_type', '')}
+            </td>
+            <td>
                     ${smtOrderOutgo.orderNo}
             </td>
             <td>
                     ${smtOrderOutgo.counts}
-            </td>
-            <td>
-                    ${smtOrderOutgo.pointCounts}
             </td>
             <td>
                 <fmt:formatDate value="${smtOrderOutgo.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -94,7 +95,7 @@
 
             <shiro:hasPermission name="smt:orderoutgo:smtOrderOutgo:edit">
                 <td>
-                    <a href="${ctx}/smt/orderoutgo/smtOrderOutgo/delete?id=${smtOrderOutgo.id}" onclick="return confirmx('确认要撤销此次出货吗？', this.href)">撤销</a>
+                    <a href="${ctx}/smt/orderoutgo/smtOrderOutgo/delete_return?id=${smtOrderOutgo.id}" onclick="return confirmx('确认要撤销此次退货吗？', this.href)">撤销</a>
                 </td>
             </shiro:hasPermission>
         </tr>

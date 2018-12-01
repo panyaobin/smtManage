@@ -19,7 +19,6 @@
              * 出货验证，不允许超过8条
              */
             $("#btnSend").bind("click", function () {
-                debugger
                 var proType = $("#productType").val();
                 var ids = getAllCheckId();
                 if (ids.split(",").length / 2 <= 8) {

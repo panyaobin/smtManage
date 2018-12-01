@@ -37,4 +37,18 @@ public interface SmtOrderCustbomDao extends CrudDao<SmtOrderCustbom> {
      * @return
      */
      int validateProductNo(@Param("productNo") String productNo,@Param("customerNo") String customerNo);
+
+    /**
+     * 查询所有的客户BOM列表信息，主表带明细
+     * @param custbom
+     * @return
+     */
+     List<SmtOrderCustbom> findOrderCustBomListWithDetail(SmtOrderCustbom custbom);
+
+    /**
+     * 查询客户bom用料信息
+     * @param bom
+     * @return
+     */
+    List<SmtOrderCustbom> findOrderCustbomList(@Param("bom") SmtOrderCustbom bom);
 }

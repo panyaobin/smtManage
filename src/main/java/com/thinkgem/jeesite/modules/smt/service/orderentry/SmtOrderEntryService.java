@@ -191,4 +191,13 @@ public class SmtOrderEntryService extends CrudService<SmtOrderEntryDao, SmtOrder
     public SmtOrderEntry findOrderInfoById(String id) {
         return dao.findOrderInfoById(id);
     }
+
+    /**
+     * 根据 订单号查询
+     * @param orderNo
+     * @return
+     */
+    public List<SmtOrderEntry> selectByOrderNo(String orderNo){
+        return smtOrderEntryDao.selectByOrderNo(orderNo);
+    }
 }

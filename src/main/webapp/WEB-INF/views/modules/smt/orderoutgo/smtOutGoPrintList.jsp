@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
 <meta name=ProgId content=Word.Document>
 <meta name=Generator content="Microsoft Word 12">
 <meta name=Originator content="Microsoft Word 12">
@@ -30,7 +30,7 @@
   <w:TrackMoves>false</w:TrackMoves>
   <w:TrackFormatting/>
   <w:PunctuationKerning/>
-  <w:DrawingGridHorizontalSpacing>5.5 磅</w:DrawingGridHorizontalSpacing>
+  <w:DrawingGridHorizontalSpacing>5.5 纾�</w:DrawingGridHorizontalSpacing>
   <w:DisplayHorizontalDrawingGridEvery>2</w:DisplayHorizontalDrawingGridEvery>
   <w:ValidateAgainstSchemas/>
   <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
@@ -328,7 +328,7 @@
 <!--
  /* Font Definitions */
  @font-face
-	{font-family:宋体;
+	{font-family:瀹嬩綋;
 	panose-1:2 1 6 0 3 1 1 1 1 1;
 	mso-font-alt:SimSun;
 	mso-font-charset:134;
@@ -344,7 +344,7 @@
 	mso-font-pitch:variable;
 	mso-font-signature:0 0 0 0 0 0;}
 @font-face
-	{font-family:微软雅黑;
+	{font-family:寰蒋闆呴粦;
 	panose-1:2 11 5 3 2 2 4 2 2 4;
 	mso-font-charset:134;
 	mso-generic-font-family:swiss;
@@ -358,14 +358,14 @@
 	mso-font-pitch:variable;
 	mso-font-signature:-520081665 -1073717157 41 0 66047 0;}
 @font-face
-	{font-family:"\@宋体";
+	{font-family:"\@瀹嬩綋";
 	panose-1:2 1 6 0 3 1 1 1 1 1;
 	mso-font-charset:134;
 	mso-generic-font-family:auto;
 	mso-font-pitch:variable;
 	mso-font-signature:3 680460288 22 0 262145 0;}
 @font-face
-	{font-family:"\@微软雅黑";
+	{font-family:"\@寰蒋闆呴粦";
 	panose-1:2 11 5 3 2 2 4 2 2 4;
 	mso-font-charset:134;
 	mso-generic-font-family:swiss;
@@ -385,7 +385,7 @@
 	mso-layout-grid-align:none;
 	font-size:11.0pt;
 	font-family:"Tahoma","sans-serif";
-	mso-fareast-font-family:微软雅黑;
+	mso-fareast-font-family:寰蒋闆呴粦;
 	mso-bidi-font-family:"Times New Roman";
 	mso-bidi-theme-font:minor-bidi;}
 .MsoChpDefault
@@ -393,7 +393,7 @@
 	mso-default-props:yes;
 	font-size:11.0pt;
 	mso-ansi-font-size:11.0pt;
-	mso-fareast-font-family:微软雅黑;
+	mso-fareast-font-family:寰蒋闆呴粦;
 	mso-bidi-font-family:"Times New Roman";
 	mso-bidi-theme-font:minor-bidi;
 	mso-font-kerning:0pt;}
@@ -420,7 +420,7 @@ div.WordSection1
 <style>
  /* Style Definitions */
  table.MsoNormalTable
-	{mso-style-name:普通表格;
+	{mso-style-name:鏅�氳〃鏍�;
 	mso-tstyle-rowband-size:0;
 	mso-tstyle-colband-size:0;
 	mso-style-noshow:yes;
@@ -461,7 +461,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:24.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><b><span
-  style='font-size:14.0pt;font-family:宋体;mso-bidi-font-family:宋体;color:black'>东莞市卓亿兴电子有限公司<span
+  style='font-size:14.0pt;font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>涓滆帪甯傚崜浜垮叴鐢靛瓙鏈夐檺鍏徃<span
   lang=EN-US><o:p></o:p></span></span></b></p>
   </td>
  </tr>
@@ -470,16 +470,16 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:20.1pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>地址：东莞市长安镇锦富路<span
-  lang=EN-US>92</span>号 电话：<span lang=EN-US>18588206782<o:p></o:p></span></span></p>
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鍦板潃锛氫笢鑾炲競闀垮畨闀囬敠瀵岃矾<span
+  lang=EN-US>92</span>鍙� 鐢佃瘽锛�<span lang=EN-US>18588206782<o:p></o:p></span></span></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:2;height:20.1pt'>
   <td width=221 nowrap colspan=2 valign=bottom style='width:165.55pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:20.1pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><b><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>客户：客户<span lang=EN-US>123<o:p></o:p></span></span></b></p>
+  both;mso-layout-grid-align:auto'><b><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>瀹㈡埛锛�${map["customerName"]}<span lang=EN-US>123<o:p></o:p></span></span></b></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:20.1pt'></td>
@@ -495,55 +495,55 @@ div.WordSection1
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:20.1pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><b><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>　<span lang=EN-US><o:p></o:p></span></span></b></p>
+  both;mso-layout-grid-align:auto'><b><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>銆�<span lang=EN-US><o:p></o:p></span></span></b></p>
   </td>
   <td width=183 nowrap colspan=3 valign=bottom style='width:137.1pt;border:
   none;border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:20.1pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><b><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>单号：单号<span lang=EN-US><o:p></o:p></span></span></b></p>
+  both;mso-layout-grid-align:auto'><b><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>鍗曞彿锛�${map["sendNo"]}<span lang=EN-US><o:p></o:p></span></span></b></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:3;height:24.95pt'>
   <td width=124 nowrap style='width:92.9pt;border:solid windowtext 1.0pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>型号：型号<span lang=EN-US>123<o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>鍨嬪彿锛�</span></p>
   </td>
   <td width=97 nowrap style='width:72.65pt;border:solid windowtext 1.0pt;
   border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:24.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>　<span lang=EN-US><o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>${map["productNo"]}<span lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=122 nowrap colspan=2 style='width:91.4pt;border:solid windowtext 1.0pt;
   border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:24.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>数量：数量<span lang=EN-US>123<o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>鏁伴噺锛�${map["fpcCounts"]}</span></p>
   </td>
   <td width=130 nowrap colspan=3 style='width:97.75pt;border:solid windowtext 1.0pt;
   border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:24.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>总点数：总点数<span lang=EN-US>123<o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>鎬荤偣鏁帮細${map["pointCounts"]}</span></p>
   </td>
   <td width=146 nowrap style='width:109.75pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:24.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>日期：<span lang=EN-US>2018/10/10<o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>鏃ユ湡锛�${map["createDate"]}</span></p>
   </td>
   <td width=183 nowrap colspan=3 style='width:137.1pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -551,8 +551,8 @@ div.WordSection1
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:24.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>订单号：订单号<span lang=EN-US>123<o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>璁㈠崟鍙凤細${map["orderNo"]}</span></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:4;height:20.1pt'>
@@ -561,7 +561,7 @@ div.WordSection1
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:20.1pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物 料 清 单<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗� 鏂� 娓� 鍗�<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -572,7 +572,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>序<span lang=EN-US><o:p></o:p></span></span></p>
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>搴�<span lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -580,7 +580,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -589,7 +589,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -598,7 +598,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -607,7 +607,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=5 nowrap rowspan=13 valign=bottom style='width:3.4pt;border-top:
@@ -617,7 +617,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>　<span lang=EN-US><o:p></o:p></span></span></p>
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>銆�<span lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -625,7 +625,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>序<span lang=EN-US><o:p></o:p></span></span></p>
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>搴�<span lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -633,7 +633,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -642,7 +642,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -651,7 +651,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -660,10 +660,11 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.95pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US><o:p></o:p></span></span></p>
   </td>
  </tr>
+    
  <tr style='mso-yfti-irow:6;height:18.0pt'>
   <td width=124 nowrap valign=bottom style='width:92.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
@@ -671,7 +672,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>1<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>1<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -679,7 +680,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>2<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -688,7 +689,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>2<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -697,7 +698,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>2<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -706,7 +707,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>2<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -715,7 +716,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>13<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>13<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -723,7 +724,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>15<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -732,7 +733,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>15<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -741,7 +742,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>15<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -750,7 +751,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>15<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -761,7 +762,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>2<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>2<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -769,7 +770,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>3<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -778,7 +779,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>3<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -787,7 +788,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>3<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -796,7 +797,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>3<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -805,7 +806,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>14<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>14<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -813,7 +814,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>16<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -822,7 +823,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>16<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -831,7 +832,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>16<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -840,7 +841,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>16<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -851,7 +852,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>3<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>3<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -859,7 +860,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>4<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -868,7 +869,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>4<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -877,7 +878,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>4<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -886,7 +887,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>4<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -895,7 +896,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>15<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>15<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -903,7 +904,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>17<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -912,7 +913,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>17<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -921,7 +922,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>17<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -930,7 +931,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>17<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -941,7 +942,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>4<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>4<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -949,7 +950,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>5<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -958,7 +959,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>5<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -967,7 +968,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>5<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -976,7 +977,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>5<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -985,7 +986,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>16<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>16<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -993,7 +994,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>18<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1002,7 +1003,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>18<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1011,7 +1012,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>18<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1020,7 +1021,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>18<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1031,7 +1032,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>5<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>5<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1039,7 +1040,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>6<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1048,7 +1049,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>6<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1057,7 +1058,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>6<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1066,7 +1067,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>6<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1075,7 +1076,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>17<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>17<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1083,7 +1084,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>19<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1092,7 +1093,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>19<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1101,7 +1102,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>19<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1110,7 +1111,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>19<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1121,7 +1122,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>6<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>6<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1129,7 +1130,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>7<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1138,7 +1139,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>7<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1147,7 +1148,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>7<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1156,7 +1157,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>7<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1165,7 +1166,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>18<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>18<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1173,7 +1174,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>20<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1182,7 +1183,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>20<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1191,7 +1192,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>20<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1200,7 +1201,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>20<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1211,7 +1212,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>7<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>7<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1219,7 +1220,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>8<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1228,7 +1229,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>8<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1237,7 +1238,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>8<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1246,7 +1247,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>8<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1255,7 +1256,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>19<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>19<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1263,7 +1264,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>21<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1272,7 +1273,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>21<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1281,7 +1282,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>21<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1290,7 +1291,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>21<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1301,7 +1302,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>8<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>8<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1309,7 +1310,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>9<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1318,7 +1319,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>9<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1327,7 +1328,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>9<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1336,7 +1337,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>9<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1345,7 +1346,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>20<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>20<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1353,7 +1354,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>22<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1362,7 +1363,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>22<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1371,7 +1372,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>22<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1380,7 +1381,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>22<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1391,7 +1392,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>9<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>9<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1399,7 +1400,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>10<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1408,7 +1409,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>10<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1417,7 +1418,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>10<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1426,7 +1427,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>10<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1435,7 +1436,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>21<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>21<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1443,7 +1444,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>23<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1452,7 +1453,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>23<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1461,7 +1462,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>23<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1470,7 +1471,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>23<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1481,7 +1482,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>10<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>10<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1489,7 +1490,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>11<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1498,7 +1499,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>11<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1507,7 +1508,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>11<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1516,7 +1517,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>11<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1525,7 +1526,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>22<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>22<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1533,7 +1534,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>24<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1542,7 +1543,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>24<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1551,7 +1552,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>24<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1560,7 +1561,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>24<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1571,7 +1572,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>11<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>11<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1579,7 +1580,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>12<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1588,7 +1589,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>12<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1597,7 +1598,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>12<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1606,7 +1607,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>12<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1615,7 +1616,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>23<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>23<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1623,7 +1624,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>25<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1632,7 +1633,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>25<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1641,7 +1642,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>25<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1650,7 +1651,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>25<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1661,7 +1662,7 @@ div.WordSection1
   0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>12<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>12<o:p></o:p></span></p>
   </td>
   <td width=97 nowrap valign=bottom style='width:72.65pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1669,7 +1670,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>13<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1678,7 +1679,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>13<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1687,7 +1688,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>13<o:p></o:p></span></span></p>
   </td>
   <td width=94 nowrap valign=bottom style='width:70.65pt;border-top:none;
@@ -1696,7 +1697,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>13<o:p></o:p></span></span></p>
   </td>
   <td width=32 nowrap valign=bottom style='width:23.7pt;border-top:none;
@@ -1705,7 +1706,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  lang=EN-US style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>24<o:p></o:p></span></p>
+  lang=EN-US style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>24<o:p></o:p></span></p>
   </td>
   <td width=146 nowrap valign=bottom style='width:109.75pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1713,7 +1714,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>物料型号<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鐗╂枡鍨嬪彿<span
   lang=EN-US>26<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1722,7 +1723,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>类型<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>绫诲瀷<span
   lang=EN-US>26<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1731,7 +1732,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>数量<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>鏁伴噺<span
   lang=EN-US>26<o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;border-top:none;
@@ -1740,7 +1741,7 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;layout-grid-mode:both;mso-layout-grid-align:auto'><span
-  style='font-family:宋体;mso-bidi-font-family:宋体;color:black'>备品<span
+  style='font-family:瀹嬩綋;mso-bidi-font-family:瀹嬩綋;color:black'>澶囧搧<span
   lang=EN-US>26<o:p></o:p></span></span></p>
   </td>
  </tr>
@@ -1749,8 +1750,8 @@ div.WordSection1
   border:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>制表：<span lang=EN-US><o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>鍒惰〃锛�<span lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.95pt'></td>
@@ -1767,8 +1768,8 @@ div.WordSection1
   <td width=61 nowrap valign=bottom style='width:45.7pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.95pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;layout-grid-mode:
-  both;mso-layout-grid-align:auto'><span style='font-family:宋体;mso-bidi-font-family:
-  宋体;color:black'>签收：<span lang=EN-US><o:p></o:p></span></span></p>
+  both;mso-layout-grid-align:auto'><span style='font-family:瀹嬩綋;mso-bidi-font-family:
+  瀹嬩綋;color:black'>绛炬敹锛�<span lang=EN-US><o:p></o:p></span></span></p>
   </td>
   <td width=61 nowrap valign=bottom style='width:45.7pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.95pt'></td>

@@ -20,6 +20,13 @@ public class SmtOrderCustbom extends DataEntity<SmtOrderCustbom> {
 	private String productNo;		// 型号
 	private String pointCounts;		// 总点数
 
+    private String custbomId;		// 客户BOM主表ID
+    private String bomName;		// bom名称
+    private String bomType;		// bom类型
+    private String dzlbomId;		// 电子料ID
+    private String piecePosition;		// 件位
+    private String counts;		// 用量
+    private String stockCounts;		// 备品
 	
 	public SmtOrderCustbom() {
 		super();
@@ -61,5 +68,61 @@ public class SmtOrderCustbom extends DataEntity<SmtOrderCustbom> {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getCustbomId() {
+        return custbomId;
+    }
+
+    public void setCustbomId(String custbomId) {
+        this.custbomId = custbomId;
+    }
+
+    public String getBomName() {
+        return bomName;
+    }
+
+    public void setBomName(String bomName) {
+        this.bomName = bomName;
+    }
+
+    public String getBomType() {
+        return bomType;
+    }
+
+    public void setBomType(String bomType) {
+        this.bomType = bomType;
+    }
+
+    public String getDzlbomId() {
+        return dzlbomId;
+    }
+
+    public void setDzlbomId(String dzlbomId) {
+        this.dzlbomId = dzlbomId;
+    }
+
+    public String getPiecePosition() {
+        return piecePosition;
+    }
+
+    public void setPiecePosition(String piecePosition) {
+        this.piecePosition = piecePosition;
+    }
+
+    public String getCounts() {
+        return counts;
+    }
+
+    public void setCounts(String counts) {
+        this.counts = counts;
+    }
+
+    public String getStockCounts() {
+        return stockCounts;
+    }
+
+    public void setStockCounts(String stockCounts) {
+        this.stockCounts = stockCounts;
     }
 }

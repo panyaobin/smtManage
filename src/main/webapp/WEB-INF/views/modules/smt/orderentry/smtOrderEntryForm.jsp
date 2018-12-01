@@ -27,7 +27,7 @@
 
 
             //添加多条数据
-            var num = 5; //初始值为5
+            var num = 8; //初始值为8
             $("#add_order").click(function () {
                 num++;
                 if (num > 15) {
@@ -40,7 +40,7 @@
             }); 
             //删除数据记录条数
             $("#del_order").on("click", function () {
-                if (num > 5) {
+                if (num > 8) {
                     $("#dataTable tr:last").remove();
                     num--;
                 } else {
@@ -144,7 +144,7 @@
     <%--<li><a href="${ctx}/smt/orderentry/smtOrderEntry/test">测试PDF</a></li>--%>
 </ul>
 <br/>
-<form:form id="inputForm" modelAttribute="smtOrderEntry" action="${ctx}/smt/orderentry/smtOrderEntry/save" method="post" class="form-horizontal">
+<form:form id="inputForm" modelAttribute="smtOrderEntry" action="${ctx}/smt/orderentry/smtOrderEntry/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
     <form:hidden path="id"/>
     <sys:message content="${message}"/>
 
@@ -273,6 +273,57 @@
                     <option value="">请选择</option>
                 </select></td>
                 <%--<td><input type="text" name="packageSize" id="" class="input-mini"></td>--%>
+                <td><input type="text" name="counts" id="" class="input-mini " required></td>
+                <td><input type="text" name="remarks" id="" class="input-large"></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" style="width: 15px" readonly value="6" tabindex="-1"></td>
+                <td>
+                    <select name="productType" id="" class="input-medium" onchange="btnChange(this[selectedIndex].value,this);">
+                        <option value="">请选择</option>
+                        <option value="1">FPC</option>
+                        <option value="2">电子料</option>
+                    </select>
+                </td>
+                <td><select name="productNo" id="" class="input-medium">
+                    <option value="">请选择</option>
+                </select></td>
+                    <%--<td><input type="text" name="packageSize" id="" class="input-mini"></td>--%>
+                <td><input type="text" name="counts" id="" class="input-mini " required></td>
+                <td><input type="text" name="remarks" id="" class="input-large"></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" style="width: 15px" readonly value="7" tabindex="-1"></td>
+                <td>
+                    <select name="productType" id="" class="input-medium" onchange="btnChange(this[selectedIndex].value,this);">
+                        <option value="">请选择</option>
+                        <option value="1">FPC</option>
+                        <option value="2">电子料</option>
+                    </select>
+                </td>
+                <td><select name="productNo" id="" class="input-medium">
+                    <option value="">请选择</option>
+                </select></td>
+                    <%--<td><input type="text" name="packageSize" id="" class="input-mini"></td>--%>
+                <td><input type="text" name="counts" id="" class="input-mini " required></td>
+                <td><input type="text" name="remarks" id="" class="input-large"></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" style="width: 15px" readonly value="8" tabindex="-1"></td>
+                <td>
+                    <select name="productType" id="" class="input-medium" onchange="btnChange(this[selectedIndex].value,this);">
+                        <option value="">请选择</option>
+                        <option value="1">FPC</option>
+                        <option value="2">电子料</option>
+                    </select>
+                </td>
+                <td><select name="productNo" id="" class="input-medium">
+                    <option value="">请选择</option>
+                </select></td>
+                    <%--<td><input type="text" name="packageSize" id="" class="input-mini"></td>--%>
                 <td><input type="text" name="counts" id="" class="input-mini " required></td>
                 <td><input type="text" name="remarks" id="" class="input-large"></td>
             </tr>

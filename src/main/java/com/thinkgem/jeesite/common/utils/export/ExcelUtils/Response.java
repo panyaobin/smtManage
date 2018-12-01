@@ -1,7 +1,7 @@
 package com.thinkgem.jeesite.common.utils.export.ExcelUtils;
 
-import com.thinkgem.jeesite.common.utils.utils.excel.Excel;
-import com.thinkgem.jeesite.common.utils.utils.excel.ExcelFactory;
+import com.thinkgem.jeesite.common.utils.export.excel.Excel;
+import com.thinkgem.jeesite.common.utils.export.excel.ExcelFactory;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

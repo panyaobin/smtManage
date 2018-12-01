@@ -59,7 +59,7 @@
     <thead>
     <tr>
         <th>序号</th>
-        <th>客户代码</th>
+        <th>客户名称</th>
         <th>产品型号</th>
         <th>数量</th>
         <th>产品类型</th>

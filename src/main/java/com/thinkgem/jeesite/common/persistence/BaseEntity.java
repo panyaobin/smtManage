@@ -3,13 +3,6 @@
  */
 package com.thinkgem.jeesite.common.persistence;
 
-import java.io.Serializable;
-import java.util.Map;
-
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.common.config.Global;
@@ -18,6 +11,11 @@ import com.thinkgem.jeesite.common.supcan.annotation.treelist.cols.SupCol;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Entity支持类
@@ -182,5 +180,11 @@ public abstract class BaseEntity<T> implements Serializable {
 	public static final String DEL_FLAG_NORMAL = "0";
 	public static final String DEL_FLAG_DELETE = "1";
 	public static final String DEL_FLAG_AUDIT = "2";
+
+    /**
+     * 产品类型
+     */
+	public static final String SMT_PRODUCT_TYPE_1 = "1";
+	public static final String SMT_PRODUCT_TYPE_2 = "2";
 	
 }

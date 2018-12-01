@@ -90,7 +90,7 @@
 	          (SELECT c.id from smt_order_custbom c where c.customer_no=#{customerNo} and c.product_no=#{productNo} and c.del_flag = 0)
 	        and 
 	        a.del_flag = 0
-	    GROUP BY a.create_date desc
+	    order by a.create_date desc
     </select>
 
     <!--查询是否已经存在bomName-->

@@ -1,11 +1,16 @@
 package com.thinkgem.jeesite.modules.smt.entity.orderoutgo;
 
-public class TestUser {
+public class OutGoVO {
    private String index;
+   private String indexs;
    private String bomName;
+   private String bomNames;
    private String bomType;
+   private String bomTypes;
    private String counts;
+   private String countss;
    private String stockCounts;
+   private String stockCountss;
 
     public String getIndex() {
         return index;
@@ -45,5 +50,45 @@ public class TestUser {
 
     public void setStockCounts(String stockCounts) {
         this.stockCounts = stockCounts;
+    }
+
+    public String getIndexs() {
+        return indexs;
+    }
+
+    public void setIndexs(String indexs) {
+        this.indexs = indexs;
+    }
+
+    public String getBomNames() {
+        return bomNames;
+    }
+
+    public void setBomNames(String bomNames) {
+        this.bomNames = bomNames;
+    }
+
+    public String getBomTypes() {
+        return bomTypes;
+    }
+
+    public void setBomTypes(String bomTypes) {
+        this.bomTypes = bomTypes;
+    }
+
+    public String getCountss() {
+        return countss;
+    }
+
+    public void setCountss(String countss) {
+        this.countss = countss;
+    }
+
+    public String getStockCountss() {
+        return stockCountss;
+    }
+
+    public void setStockCountss(String stockCountss) {
+        this.stockCountss = stockCountss;
     }
 }

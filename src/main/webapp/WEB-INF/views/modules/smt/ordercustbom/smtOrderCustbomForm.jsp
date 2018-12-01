@@ -131,9 +131,11 @@
     <li class="active"><a href="${ctx}/smt/ordercustbom/smtOrderCustbom/form?id=${smtOrderCustbom.id}">客户BOM<shiro:hasPermission name="smt:ordercustbom:smtOrderCustbom:edit">${not empty smtOrderCustbom.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission
             name="smt:ordercustbom:smtOrderCustbom:edit">查看</shiro:lacksPermission></a></li>
     <li><a href="${ctx}/smt/ordercustbom/smtOrderCustbom/">客户BOM列表</a></li>
+    <li><a href="${ctx}/smt/ordercustbom/smtOrderCustbom/smtOrderCustbomDetail">详情</a></li>
+    
 </ul>
 <br/>
-<form:form id="inputForm" modelAttribute="smtOrderCustbom" action="${ctx}/smt/ordercustbom/smtOrderCustbom/save" method="post" class="form-horizontal">
+<form:form id="inputForm" modelAttribute="smtOrderCustbom" action="${ctx}/smt/ordercustbom/smtOrderCustbom/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
     <form:hidden path="id"/>
     <sys:message content="${message}"/>
     <div class="control-group">

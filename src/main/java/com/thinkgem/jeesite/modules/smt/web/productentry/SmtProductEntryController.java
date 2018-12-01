@@ -7,12 +7,18 @@ import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.modules.smt.entity.modalEntity.SmtModalProductEntry;
+import com.thinkgem.jeesite.modules.smt.entity.ordercustbom.SmtOrderCustbom;
 import com.thinkgem.jeesite.modules.smt.entity.orderentry.SmtOrderEntry;
 import com.thinkgem.jeesite.modules.smt.entity.orderonline.SmtOrderOnline;
+import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.OutGoVO;
+import com.thinkgem.jeesite.modules.smt.entity.orderoutgo.SmtOrderOutgoVO;
 import com.thinkgem.jeesite.modules.smt.entity.productentry.SmtProductEntry;
 import com.thinkgem.jeesite.modules.smt.entity.syscustomer.SmtSysCustomer;
+import com.thinkgem.jeesite.modules.smt.service.ordercustbom.SmtOrderCustbomService;
 import com.thinkgem.jeesite.modules.smt.service.orderentry.SmtOrderEntryService;
 import com.thinkgem.jeesite.modules.smt.service.orderonline.SmtOrderOnlineService;
+import com.thinkgem.jeesite.modules.smt.service.orderoutgo.SmtOrderOutgoService;
 import com.thinkgem.jeesite.modules.smt.service.productentry.SmtProductEntryService;
 import com.thinkgem.jeesite.modules.smt.service.syscustomer.SmtSysCustomerService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -23,10 +29,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -48,9 +56,17 @@ public class SmtProductEntryController extends BaseController {
 
     @Autowired
     private SmtOrderOnlineService smtOrderOnlineService;
-    
+
     @Autowired
     private SmtOrderEntryService smtOrderEntryService;
+
+    @Autowired
+    private SmtOrderCustbomService smtOrderCustbomService;
+    
+    @Autowired
+    private SmtOrderOutgoService smtOrderOutgoService;
+    
+    private SmtModalProductEntry modalData = new SmtModalProductEntry();
 
 
     @ModelAttribute
@@ -137,14 +153,34 @@ public class SmtProductEntryController extends BaseController {
     }
 
     /**
+     * 弹窗数据保存，入库
+     *
+     * @param entity
+     * @return
+     */
+    @RequestMapping("/selectCustomerBomUsage")
+    @ResponseBody
+    public List<SmtOrderCustbom> selectCustomerBomUsage(SmtOrderCustbom entity) {
+        List<SmtOrderCustbom> orderCustbomList = smtOrderCustbomService.findOrderCustbomList(entity);
+        int counts = Integer.parseInt(entity.getCounts());
+        orderCustbomList.forEach(x -> {
+            x.setCounts(String.valueOf(Integer.parseInt(x.getCounts()) * counts));
+            double v = Double.parseDouble(String.valueOf(Integer.parseInt(x.getStockCounts()) * Integer.parseInt(x.getCounts()) / 1000));
+            x.setStockCounts(String.valueOf(new BigDecimal(v).setScale(0, BigDecimal.ROUND_HALF_UP)));
+        });
+        return orderCustbomList;
+    }
+
+    /**
      * 退货
+     *
      * @param smtOrderEntry
      * @param model
      * @return
      */
     @RequiresPermissions("smt:productentry:smtProductEntry:edit")
     @RequestMapping("return_goods_list")
-    public String return_goods_list(SmtOrderEntry smtOrderEntry,HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String return_goods_list(SmtOrderEntry smtOrderEntry, HttpServletRequest request, HttpServletResponse response, Model model) {
         List<SmtOrderEntry> returnGoodsList = smtOrderEntryService.findReturnGoodsList(smtOrderEntry);
         model.addAttribute("orderOnlines", returnGoodsList);
         model.addAttribute("custList", getCustomerList());
@@ -152,7 +188,7 @@ public class SmtProductEntryController extends BaseController {
         return "modules/smt/orderoutgo/smtProductReturnGoodsList";
     }
 
-    
+
     /**
      * 在线生产 成品入库信息保存
      *
@@ -215,7 +251,10 @@ public class SmtProductEntryController extends BaseController {
         }
         model.addAttribute("onlines", onlines);
         //这里是入库打印
-        String jasperPath=Thread.currentThread().getContextClassLoader().getResource("jasper/").getPath()+"Blank_A4_2.jasper";
+//        String jasperPath = "F:\\Blank_A4_2.jasper";
+
+        String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\Blank_A4_2.jasper";
+
         Map<String, Object> map = new HashMap<>(10);
         map.put("customerName", onlines.get(0).getCustomerName());
         map.put("sendNo", String.valueOf(orderNum));
@@ -228,7 +267,7 @@ public class SmtProductEntryController extends BaseController {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * 退货信息录入
      *
@@ -294,7 +333,8 @@ public class SmtProductEntryController extends BaseController {
         }
         model.addAttribute("onlines", onlines);
         //这里是退货打印
-        String jasperPath=Thread.currentThread().getContextClassLoader().getResource("jasper/").getPath()+"Blank_A4_return.jasper";
+//        String jasperPath = "F:\\Blank_A4_return.jasper";
+        String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\Blank_A4_return.jasper";
         Map<String, Object> map = new HashMap<>(10);
         map.put("customerName", onlines.get(0).getCustomerName());
         map.put("sendNo", String.valueOf(orderNum));
@@ -309,4 +349,130 @@ public class SmtProductEntryController extends BaseController {
     }
 
 
+    /**
+     * 退货列表重新打印
+     * @param outgoOrderNo
+     */
+    @RequestMapping("/reprint")
+    public void reprint(String outgoOrderNo,HttpServletResponse response){
+        List<SmtOrderOutgoVO> outgoList = smtOrderOutgoService.selectByOutGoOrderNo(outgoOrderNo);
+       
+//        String jasperPath = "F:\\Blank_A4_2.jasper";
+        String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\Blank_A4_2.jasper";
+        Map<String, Object> map = new HashMap<>(10);
+        map.put("customerName", outgoList.get(0).getCustomerName());
+        map.put("sendNo", outgoList.get(0).getOutgoOrderNo());
+        map.put("createUser", outgoList.get(0).getCreateByName());
+        map.put("createDate", new SimpleDateFormat("yyyy-MM-dd").format(outgoList.get(0).getCreateDate()));
+
+        List<SmtOrderOutgoVO> outgoVOList=new ArrayList<>();
+
+        for (int i = 0; i < outgoList.size(); i++) {
+            SmtOrderOutgoVO vo = outgoList.get(i);
+            SmtOrderOutgoVO outgoVO = new SmtOrderOutgoVO();
+            outgoVO.setIndex(String.valueOf(i+1));
+            outgoVO.setProductNo(vo.getProductNo());
+            outgoVO.setProductType(vo.getProductType()=="1"?"FPC":"电子料");
+            outgoVO.setCounts(vo.getCounts());
+            outgoVO.setRemarks(StringUtils.isBlank(vo.getRemarks())?"":vo.getRemarks());
+            outgoVOList.add(outgoVO);
+        }
+        
+        if (outgoList.size() < 8) {
+            for (int i = 0; i < 8 - outgoList.size(); i++) {
+                logger.info("如果数量不够十条，需要凑齐十条,第 " + i + "条");
+                SmtOrderOutgoVO go = new SmtOrderOutgoVO();
+                go.setIndex("");
+                go.setOrderNo("");
+                go.setCustomerNo("");
+                go.setCustomerName("");
+                go.setProductNo("");
+                go.setCounts("");
+                go.setProductType("");
+                go.setRemarks("");
+                outgoVOList.add(go);
+            }
+        }
+        try {
+            System.out.println(jasperPath);
+            demo(response, map, outgoVOList, jasperPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * 成品入库弹窗数据保存
+     * @param online
+     */
+    @RequestMapping("/saveProductEntryModalData")
+    @ResponseBody
+    public String saveProductEntryModalData(SmtOrderOnline online){
+        String code;
+        try {
+            SmtModalProductEntry modalProductEntry = smtProductEntryService.saveProductEntryModalData(online);
+            modalData =modalProductEntry;
+            code="success";
+        }catch (Exception e){
+            e.printStackTrace();
+            code ="error";
+        }
+        return code;
+    } 
+    
+    /**
+     * 成品入库弹窗数据保存
+     */
+    @RequestMapping("/printModal")
+    public void printModal(HttpServletResponse response){
+        //这里是退货打印
+//        String jasperPath = "F:\\outgo_modal.jasper";
+        String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\outgo_modal.jasper";
+        Map<String, Object> map = new HashMap<>(10);
+        map.put("customerName",modalData.getProductEntry().getCustomerName());
+        map.put("sendNo",String.valueOf(modalData.getProductEntry().getOrderNo()));
+        map.put("productNo",String.valueOf(modalData.getProductEntry().getProductNo()));
+        map.put("fpcCounts",String.valueOf(modalData.getProductEntry().getEntryCounts()));
+        map.put("createUser", UserUtils.getUser().getName());
+        map.put("createDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        try {
+            List<OutGoVO> entryList = modalData.getOutGoVOList();
+            for (int i = 0; i < 24; i++) {
+                
+            }
+
+            int size = 24 - entryList.size();
+            List<SmtProductEntry> entries = new ArrayList<>();
+            if (entryList.size() < 24) {
+                for (int i = 0; i < size; i++) {
+                    OutGoVO vo = new OutGoVO();
+                    vo.setIndex(String.valueOf(entries.size() + i));
+                    vo.setBomName("");
+                    vo.setBomType("");
+                    vo.setCounts("");
+                    vo.setStockCounts("");
+                    entryList.add(vo);
+                }
+            }
+
+            for (int i = 0; i < 12; i++) {
+                SmtProductEntry vo = new SmtProductEntry();
+                vo.setIndex(String.valueOf(i + 1));
+                vo.setBomName(entryList.get(i).getBomName());
+                vo.setBomType(entryList.get(i).getBomType());
+                vo.setCounts(entryList.get(i).getCounts());
+                vo.setStockCounts(entryList.get(i).getStockCounts());
+                vo.setIndexs(String.valueOf(13 + i));
+                vo.setBomNames(entryList.get(12 + i).getBomName());
+                vo.setBomTypes(entryList.get(12 + i).getBomType());
+                vo.setCountss(entryList.get(12 + i).getCounts());
+                vo.setStockCountss(entryList.get(12 + i).getStockCounts());
+                entries.add(vo);
+            }
+            System.out.println(jasperPath);
+            demo(response, map, entries, jasperPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

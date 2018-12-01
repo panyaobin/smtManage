@@ -48,7 +48,7 @@
     <li><a href="${ctx}/smt/orderdzlbom/smtOrderDzlbom/">物料信息表</a></li>
 </ul>
 <br/>
-<form:form id="inputForm" modelAttribute="smtOrderDzlbom" action="${ctx}/smt/orderdzlbom/smtOrderDzlbom/save" method="post" class="form-horizontal">
+<form:form id="inputForm" modelAttribute="smtOrderDzlbom" action="${ctx}/smt/orderdzlbom/smtOrderDzlbom/save" onkeypress="return event.keyCode != 13;" method="post" class="form-horizontal">
     <form:hidden path="id"/>
     <sys:message content="${message}"/>
     <div class="control-group">

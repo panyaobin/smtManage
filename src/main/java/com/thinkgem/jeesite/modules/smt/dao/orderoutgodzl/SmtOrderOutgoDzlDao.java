@@ -8,6 +8,8 @@ import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.smt.entity.orderoutgodzl.SmtOrderOutgoDzl;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 电子料出货信息表DAO接口
  * @author popo
@@ -16,4 +18,11 @@ import org.apache.ibatis.annotations.Param;
 @MyBatisDao
 public interface SmtOrderOutgoDzlDao extends CrudDao<SmtOrderOutgoDzl> {
 	void cancle_outgo(@Param("fId") String fId);
+
+    /**
+     * 通过FPC出货编号查询电子料出货信息
+     * @param outgoId
+     * @return
+     */
+    List<SmtOrderOutgoDzl> selectByOutGoId(@Param("outgoId") String outgoId);
 }
