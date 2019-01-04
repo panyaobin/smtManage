@@ -301,6 +301,19 @@ public class SmtOrderOnlineController extends BaseController {
     }
 
     /**
+     * 发料记录根据发料单号重新打印pdf
+     * @param smtOrderOnline
+     * @param redirectAttributes
+     * @param response
+     */
+    @RequestMapping(value = "re_print")
+    public void re_print(SmtOrderOnline smtOrderOnline,RedirectAttributes redirectAttributes,HttpServletResponse response) {
+        List<SmtOrderOnline> orderOnlineList=smtOrderOnlineService.findListBySendNo(smtOrderOnline.getSendNo());
+        System.out.println(1);
+    }
+
+
+    /**
      * 在线生产录入操作，由仓库发料而来
      *
      * @return

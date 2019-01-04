@@ -22,7 +22,7 @@ public class SmtOrderOnline extends DataEntity<SmtOrderOnline> {
 	private String productNo;		// 产品编号
 	private String productType;		// 产品类型 1.FPC 2.电子料
 	private String counts;		// 数量
-	private int sendNo;		// 数量
+	private String sendNo;		// 数量
     private String custBomTableData; //表格数据集合
 	
 	public SmtOrderOnline() {
@@ -86,11 +86,11 @@ public class SmtOrderOnline extends DataEntity<SmtOrderOnline> {
 		this.counts = counts;
 	}
 
-    public int getSendNo() {
+    public String getSendNo() {
         return sendNo;
     }
 
-    public void setSendNo(int sendNo) {
+    public void setSendNo(String sendNo) {
         this.sendNo = sendNo;
     }
 

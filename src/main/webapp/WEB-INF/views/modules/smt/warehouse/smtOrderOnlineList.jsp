@@ -76,7 +76,7 @@
                     ${smtOrderOnline.productNo}
             </td>
             <td>
-                    ${smtOrderOnline.sendNo}
+                <a href='${ctx}/smt/orderonline/smtOrderOnline/re_print?sendNo=${smtOrderOnline.sendNo}'>${smtOrderOnline.sendNo}</a>
             </td>
             <td>
                     ${fns:getDictLabel(smtOrderOnline.productType,"smt_product_type" ,"")}

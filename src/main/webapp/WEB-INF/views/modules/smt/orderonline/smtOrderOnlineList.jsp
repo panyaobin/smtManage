@@ -87,7 +87,7 @@
         <li>产品型号：<input type="text" name="productNo" id="productNo" value="${smtOrderOnline.productNo}" style="width: 50%"></li>
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
         <li class="btns"><input id="btnReset" class="btn btn-primary" type="reset" onclick="window.location.href='${ctx}/smt/orderonline/smtOrderOnline/total_list'" value="重置"/></li>
-        <li class="btns"><input id="btnSend" class="btn btn-primary" type="button" value="成品入库"/></li>
+        <li class="btns"><input id="btnSend" class="btn btn-primary" type="button" value="半成品入库"/></li>
         <li class="btns"><input id="btnExport" class="btn btn-primary" type="button" value="导出"/></li>
         <li class="clearfix"></li>
     </ul>
