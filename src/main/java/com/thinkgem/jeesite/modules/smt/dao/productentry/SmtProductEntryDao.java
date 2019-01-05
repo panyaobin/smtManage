@@ -6,6 +6,9 @@ package com.thinkgem.jeesite.modules.smt.dao.productentry;
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.smt.entity.productentry.SmtProductEntry;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 成品入库表DAO接口
@@ -19,4 +22,18 @@ public interface SmtProductEntryDao extends CrudDao<SmtProductEntry> {
      * @return
      */
 	String findOrderNoFromList();
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    String queryTypeByName(@Param("name") String name);
+
+    /**
+     *  根据入库单号重新打印
+     * @param orderNo
+     * @return
+     */
+    List<SmtProductEntry> selectListByOrderNo(@Param("orderNo") String orderNo);
 }

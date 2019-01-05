@@ -57,10 +57,11 @@
     <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
         <li class="active"><a href="">入库</a></li>
     </shiro:hasPermission>
-    
-
     <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
-        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list">成品入库记录</a></li>
+        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list?storageType=1">成品入库记录</a></li>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
+        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list_half?storageType=2">半成品入库记录</a></li>
     </shiro:hasPermission>
 </ul>
 <form:form id="searchForm" modelAttribute="smtProductEntry" action="${ctx}/smt/productentry/smtProductEntry/print" onkeypress="return event.keyCode != 13;" method="post" class="breadcrumb form-search">

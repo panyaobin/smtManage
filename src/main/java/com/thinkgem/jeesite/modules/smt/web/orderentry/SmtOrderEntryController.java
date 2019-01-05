@@ -280,7 +280,8 @@ public class SmtOrderEntryController extends BaseController {
             list.setBomName("张三"+i);
             lists.add(list);
         }
-        String jasperPath = "F:\\custbomlist.jasper";
+        String jasperPath = "";
+//        String jasperPath = "F:\\custbomlist.jasper";
         demo(response, map, lists, jasperPath);
     }
     

@@ -30,8 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.thinkgem.jeesite.common.persistence.BaseEntity.DEL_FLAG_NORMAL;
-import static com.thinkgem.jeesite.common.persistence.BaseEntity.SMT_PRODUCT_TYPE_1;
+import static com.thinkgem.jeesite.common.persistence.BaseEntity.*;
 
 /**
  * 成品入库表Service
@@ -103,6 +102,8 @@ public class SmtProductEntryService extends CrudService<SmtProductEntryDao, SmtP
             entry.setProductNo(proNo[i]);
             entry.setOrderNo(orderNo);
             entry.setEntryCounts(counts[i]);
+            entry.setStorageType(SMT_STORAGE_TYPE_2
+            );
             entry.setProductType(proType[i]);
             entry.preInsert();
             if (remarks.length > 0 && i < remarks.length) {
@@ -180,6 +181,7 @@ public class SmtProductEntryService extends CrudService<SmtProductEntryDao, SmtP
         entry.setProductType(SMT_PRODUCT_TYPE_1);
         entry.setEntryCounts(online.getCounts());
         entry.setDelFlag(DEL_FLAG_NORMAL);
+        entry.setStorageType(SMT_STORAGE_TYPE_1);
         entry.preInsert();
         dao.insert(entry);
         
@@ -201,9 +203,12 @@ public class SmtProductEntryService extends CrudService<SmtProductEntryDao, SmtP
                 productEntry.setOrderNo(entry.getOrderNo());
                 int total = Integer.parseInt(String.valueOf(object.get("counts"))) + Integer.parseInt(String.valueOf(object.get("stockCounts")));
                 productEntry.setEntryCounts(String.valueOf(total));
+                productEntry.setStockCounts(String.valueOf(object.get("stockCounts")));
                 go.setCounts(String.valueOf(object.get("counts")));
                 go.setStockCounts(String.valueOf(object.get("stockCounts")));
-                productEntry.setProductType(String.valueOf(object.get("bomType")));
+//                productEntry.setProductType(String.valueOf(object.get("bomType")));
+                productEntry.setProductType(SMT_PRODUCT_TYPE_2);
+                productEntry.setStorageType(SMT_STORAGE_TYPE_1);
                 go.setBomType(String.valueOf(object.get("bomType")));
                 productEntry.setDelFlag(DEL_FLAG_NORMAL);
                 productEntry.preInsert();
@@ -258,5 +263,23 @@ public class SmtProductEntryService extends CrudService<SmtProductEntryDao, SmtP
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 根据电子料名称查询电子料类型（电容 电阻）
+     * @param name
+     * @return
+     */
+    public String queryTypeByName(String name){
+        return dao.queryTypeByName(name);
+    }
+
+    /**
+     *  根据入库单号重新打印
+     * @param orderNo
+     * @return
+     */
+    public List<SmtProductEntry> selectListByOrderNo(String orderNo){
+        return dao.selectListByOrderNo(orderNo);
     }
 }

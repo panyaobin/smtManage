@@ -231,4 +231,5 @@ public class SmtOrderCustbomService extends CrudService<SmtOrderCustbomDao, SmtO
     public List<SmtOrderCustbom> findOrderCustbomList(SmtOrderCustbom bom){
         return smtOrderCustbomDao.findOrderCustbomList(bom);
     }
+
 }

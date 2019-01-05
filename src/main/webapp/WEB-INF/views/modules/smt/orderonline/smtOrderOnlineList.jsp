@@ -69,7 +69,10 @@
         <li class="active"><a href="${ctx}/smt/orderonline/smtOrderOnline/total_list">在线结存</a></li>
     </shiro:hasPermission>
     <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
-        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list">成品入库记录</a></li>
+        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list?storageType=1">成品入库记录</a></li>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
+        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list_half?storageType=2">半成品入库记录</a></li>
     </shiro:hasPermission>
 </ul>
 <form:form id="searchForm" modelAttribute="smtOrderOnline" action="${ctx}/smt/orderonline/smtOrderOnline/total_list" method="post" class="breadcrumb form-search">

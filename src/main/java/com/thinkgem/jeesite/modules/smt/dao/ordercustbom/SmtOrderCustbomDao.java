@@ -51,4 +51,6 @@ public interface SmtOrderCustbomDao extends CrudDao<SmtOrderCustbom> {
      * @return
      */
     List<SmtOrderCustbom> findOrderCustbomList(@Param("bom") SmtOrderCustbom bom);
+
+    
 }

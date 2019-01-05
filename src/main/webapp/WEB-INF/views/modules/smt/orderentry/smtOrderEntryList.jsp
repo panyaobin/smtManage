@@ -216,7 +216,7 @@
     </tbody>
 </table>
 <%--成品入库详情弹窗--%>
-<div class="modal fade" id="orderEntryModal" tabindex="-1" role="dialog" aria-labelledby="ProjectContractModalLabel" aria-hidden="true">
+<div class="modal fade" id="orderEntryModal" tabindex="-1" role="dialog" aria-labelledby="ProjectContractModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="padding:10px;background-color: #45aeea">

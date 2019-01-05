@@ -45,7 +45,7 @@ import java.util.*;
 public class SmtOrderOnlineController extends BaseController {
 
     private static Logger log = LoggerFactory.getLogger(SmtOrderOnlineController.class);
-    
+
     @Autowired
     private SmtOrderOnlineService smtOrderOnlineService;
 
@@ -118,9 +118,9 @@ public class SmtOrderOnlineController extends BaseController {
         model.addAttribute("page", page);
         return "modules/smt/orderonline/smtOrderOnlineDzlList";
     }
-    
+
     /**
-     * 仓库在线生产列表，不区分产品类型 
+     * 仓库在线生产列表，不区分产品类型
      *
      * @param smtOrderOnline
      * @param request
@@ -189,8 +189,8 @@ public class SmtOrderOnlineController extends BaseController {
             }
         }
     }
-    
-    
+
+
     /**
      * 发料记录查询
      *
@@ -230,17 +230,17 @@ public class SmtOrderOnlineController extends BaseController {
     @RequiresPermissions("smt:orderonline:smtOrderOnline:edit")
     @RequestMapping(value = "print")
     public void to_save_send(SmtOrderOnline smtOrderOnline, Model model, RedirectAttributes redirectAttributes,HttpServletResponse response) {
-        String [] orderNo=smtOrderOnline.getOrderNo().split(",");  
-        String [] customerNo=smtOrderOnline.getCustomerNo().split(",");  
-        String [] customerName=smtOrderOnline.getCustomerName().split(",");  
-        String [] productNo=smtOrderOnline.getProductNo().split(",");  
+        String [] orderNo=smtOrderOnline.getOrderNo().split(",");
+        String [] customerNo=smtOrderOnline.getCustomerNo().split(",");
+        String [] customerName=smtOrderOnline.getCustomerName().split(",");
+        String [] productNo=smtOrderOnline.getProductNo().split(",");
         String [] productType=smtOrderOnline.getProductType().split(",");
         String [] counts=smtOrderOnline.getCounts().split(",");
         String [] remarks=null;
         if (StringUtils.isNotBlank(smtOrderOnline.getRemarks())){
             remarks=smtOrderOnline.getRemarks().split(",");
         }else{
-            
+
         }
         List<SmtOrderOnline> onlines=new ArrayList<SmtOrderOnline>();
         for (int i = 0; i <orderNo.length ; i++) {
@@ -270,7 +270,7 @@ public class SmtOrderOnlineController extends BaseController {
                 on.setProductNo("");
                 on.setProductType("");
                 on.setRemarks("");
-                onlines.add(on);    
+                onlines.add(on);
             }
         }
         int send=0;
@@ -278,13 +278,13 @@ public class SmtOrderOnlineController extends BaseController {
              send= smtOrderOnlineService.to_save_send(smtOrderOnline);
              logger.info("自动生成的发料单号是："+String.valueOf(send));
             addMessage(redirectAttributes, "发料操作成功");
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             addMessage(redirectAttributes, "操作失败");
         }
         model.addAttribute("onlines",onlines);
-//        String jasperPath = "F:\\Blank_A4_1.jasper";
+//        String jasperPath = "D:\\develop\\jasperPath\\Blank_A4_1.jasper";
         String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\Blank_A4_1.jasper";
 
         Map<String, Object> map = new HashMap<>(10);
@@ -309,7 +309,51 @@ public class SmtOrderOnlineController extends BaseController {
     @RequestMapping(value = "re_print")
     public void re_print(SmtOrderOnline smtOrderOnline,RedirectAttributes redirectAttributes,HttpServletResponse response) {
         List<SmtOrderOnline> orderOnlineList=smtOrderOnlineService.findListBySendNo(smtOrderOnline.getSendNo());
-        System.out.println(1);
+
+        if (orderOnlineList.size()<8) {
+            int size= 8-orderOnlineList.size();
+            for (int i = 0; i < size; i++) {
+                SmtOrderOnline online = new SmtOrderOnline();
+                online.setIndex(String.valueOf(orderOnlineList.size() + 1 + i));
+                online.setProductNo("");
+                online.setProductType(" ");
+                online.setCounts("");
+                online.setRemarks(" ");
+                orderOnlineList.add(online);
+            }
+        }
+
+        for (int i = 0; i < orderOnlineList.size(); i++) {
+            orderOnlineList.get(i).setIndex(String.valueOf(i+1));
+            String type = orderOnlineList.get(i).getProductType();
+            if (type.equals("1")){
+                type="FPC";
+            }
+            if (type.equals("2")){
+                type="电子料";
+            }
+            if (StringUtils.isBlank(type)){
+                type=" ";
+            }
+            if (StringUtils.isBlank(orderOnlineList.get(i).getRemarks())){
+                orderOnlineList.get(i).setRemarks(" ");
+            }
+            orderOnlineList.get(i).setProductType(type);
+        }
+
+        Map<String, Object> map = new HashMap<>(10);
+        map.put("customerName", orderOnlineList.get(0).getCustomerName());
+        map.put("sendNo",orderOnlineList.get(0).getSendNo());
+        map.put("createUser",UserUtils.getUser().getName());
+        map.put("createDate",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        try {
+//            String jasperPath = "D:\\develop\\jasperPath\\Blank_A4_1.jasper";
+          String jasperPath = "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\ROOT\\WEB-INF\\classes\\jasper\\Blank_A4_1.jasper";
+            System.out.println(jasperPath);
+            demo(response,map,orderOnlineList,jasperPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
