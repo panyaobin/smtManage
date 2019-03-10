@@ -368,9 +368,9 @@ public class SmtOrderOutgoController extends BaseController {
             map.put("orderNo", smtOrderOutgo.getOrderNo());
             map.put("createUser", UserUtils.getUser().getName());
 
-            int size = 20 - jsonArray.size();
+            int size = 24 - jsonArray.size();
             List<OutGoVO> outGoVOS = new ArrayList<>();
-            if (jsonArray.size() < 20) {
+            if (jsonArray.size() < 24) {
                 for (int i = 0; i < size; i++) {
                     OutGoVO vo = new OutGoVO();
                     vo.setIndex(String.valueOf(jsonArray.size() + i));
@@ -382,18 +382,18 @@ public class SmtOrderOutgoController extends BaseController {
                 }
             }
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 12; i++) {
                 OutGoVO vo = new OutGoVO();
                 vo.setIndex(String.valueOf(i + 1));
                 vo.setBomName(((JSONObject) jsonArray.get(i)).get("bomName").toString());
                 vo.setBomType(((JSONObject) jsonArray.get(i)).get("bomType").toString());
                 vo.setCounts(((JSONObject) jsonArray.get(i)).get("counts").toString());
                 vo.setStockCounts(((JSONObject) jsonArray.get(i)).get("stockCounts").toString());
-                vo.setIndexs(String.valueOf(11 + i));
-                vo.setBomNames(((JSONObject) jsonArray.get(10 + i)).get("bomName").toString());
-                vo.setBomTypes(((JSONObject) jsonArray.get(10 + i)).get("bomType").toString());
-                vo.setCountss(((JSONObject) jsonArray.get(10 + i)).get("counts").toString());
-                vo.setStockCountss(((JSONObject) jsonArray.get(10 + i)).get("stockCounts").toString());
+                vo.setIndexs(String.valueOf(13 + i));
+                vo.setBomNames(((JSONObject) jsonArray.get(12 + i)).get("bomName").toString());
+                vo.setBomTypes(((JSONObject) jsonArray.get(12 + i)).get("bomType").toString());
+                vo.setCountss(((JSONObject) jsonArray.get(12 + i)).get("counts").toString());
+                vo.setStockCountss(((JSONObject) jsonArray.get(12 + i)).get("stockCounts").toString());
                 outGoVOS.add(vo);
             }
             maps = map;
