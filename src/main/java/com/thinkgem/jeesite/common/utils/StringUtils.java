@@ -415,4 +415,6 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         return pattern.matcher(str).matches();
     }
+
+
 }

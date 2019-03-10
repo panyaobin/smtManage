@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.paymentapply.SmtPaymentApplyDao">
+    
+	<sql id="smtPaymentApplyColumns">
+		a.id AS "id",
+		a.payment_id AS "paymentId",
+		b.account_name as "accountName",
+		a.payment_money AS "paymentMoney",
+		a.payment_reason AS "paymentReason",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="smtPaymentApplyJoins">
+		left join smt_payment_info b on b.id = a.payment_id and b.del_flag = 0
+	</sql>
+    
+	<select id="get" resultType="SmtPaymentApply">
+		SELECT 
+			<include refid="smtPaymentApplyColumns"/>
+		FROM smt_payment_apply a
+		<include refid="smtPaymentApplyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="SmtPaymentApply">
+		SELECT 
+			<include refid="smtPaymentApplyColumns"/>
+		FROM smt_payment_apply a
+		<include refid="smtPaymentApplyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="paymentId != null and paymentId != ''">
+				AND a.payment_id = #{paymentId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<!--根据ID查询付款申请集合VO-->
+	<select id="getSmtPaymentApplyVoById" resultType="com.thinkgem.jeesite.modules.smt.vo.SmtPaymentApplyVO">
+		SELECT
+			a.id,
+			b.collection_unit as "accountName",
+			b.account_number,
+			b.account_bank,
+			a.payment_money,
+			a.payment_reason,
+			a.create_date,
+			a.remarks
+		FROM
+			smt_payment_apply a
+			LEFT JOIN smt_payment_info b ON a.payment_id = b.id
+			AND b.del_flag = 0
+		WHERE
+			a.del_flag = 0
+			AND a.id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="SmtPaymentApply">
+		SELECT 
+			<include refid="smtPaymentApplyColumns"/>
+		FROM smt_payment_apply a
+		<include refid="smtPaymentApplyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO smt_payment_apply(
+			payment_id,
+			payment_money,
+			payment_reason,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{paymentId},
+			#{paymentMoney},
+			#{paymentReason},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE smt_payment_apply SET 	
+			payment_id = #{paymentId},
+			payment_money = #{paymentMoney},
+			payment_reason = #{paymentReason},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE smt_payment_apply SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

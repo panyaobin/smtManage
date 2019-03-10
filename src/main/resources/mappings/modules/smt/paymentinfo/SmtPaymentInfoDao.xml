@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.smt.dao.paymentinfo.SmtPaymentInfoDao">
+    
+	<sql id="smtPaymentInfoColumns">
+		a.id AS "id",
+		a.collection_unit AS "collectionUnit",
+		a.account_name AS "accountName",
+		a.account_number AS "accountNumber",
+		a.account_bank AS "accountBank",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="smtPaymentInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="SmtPaymentInfo">
+		SELECT 
+			<include refid="smtPaymentInfoColumns"/>
+		FROM smt_payment_info a
+		<include refid="smtPaymentInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="SmtPaymentInfo">
+		SELECT 
+			<include refid="smtPaymentInfoColumns"/>
+		FROM smt_payment_info a
+		<include refid="smtPaymentInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="collectionUnit != null and collectionUnit != ''">
+				AND a.collection_unit LIKE 
+					<if test="dbName == 'oracle'">'%'||#{collectionUnit}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{collectionUnit}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{collectionUnit},'%')</if>
+			</if>
+			<if test="accountName != null and accountName != ''">
+				AND a.account_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{accountName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{accountName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{accountName},'%')</if>
+			</if>
+			<if test="accountNumber != null and accountNumber != ''">
+				AND a.account_number LIKE 
+					<if test="dbName == 'oracle'">'%'||#{accountNumber}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{accountNumber}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{accountNumber},'%')</if>
+			</if>
+			<if test="accountBank != null and accountBank != ''">
+				AND a.account_bank LIKE 
+					<if test="dbName == 'oracle'">'%'||#{accountBank}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{accountBank}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{accountBank},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="SmtPaymentInfo">
+		SELECT 
+			<include refid="smtPaymentInfoColumns"/>
+		FROM smt_payment_info a
+		<include refid="smtPaymentInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO smt_payment_info(
+			id,
+			collection_unit,
+			account_name,
+			account_number,
+			account_bank,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{collectionUnit},
+			#{accountName},
+			#{accountNumber},
+			#{accountBank},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE smt_payment_info SET 	
+			collection_unit = #{collectionUnit},
+			account_name = #{accountName},
+			account_number = #{accountNumber},
+			account_bank = #{accountBank},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE smt_payment_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
