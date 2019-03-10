@@ -89,7 +89,7 @@ public class SmtOrderOnlineService extends CrudService<SmtOrderOnlineDao, SmtOrd
         for (int i = 0; i < proNo.length; i++) {
             SmtOrderOnline online = new SmtOrderOnline();
             online.setOrderNo(orderNo[i]);
-            online.setSendNo(sendNo);
+            online.setSendNo(String.valueOf(sendNo));
             online.setCustomerNo(custNo[i]);
             online.setProductNo(proNo[i]);
             online.setCounts(counts[i]);
@@ -111,5 +111,14 @@ public class SmtOrderOnlineService extends CrudService<SmtOrderOnlineDao, SmtOrd
      */
     public List<SmtOrderOnline> findProductEntryCount(SmtOrderOnline smtOrderOnline) {
         return dao.findProductEntryCount(smtOrderOnline);
+    }
+
+    /**
+     * 根据发料单号查询发料记录
+     * @param sendNo
+     * @return
+     */
+    public List<SmtOrderOnline> findListBySendNo(String sendNo){
+        return dao.findListBySendNo(sendNo);
     }
 }

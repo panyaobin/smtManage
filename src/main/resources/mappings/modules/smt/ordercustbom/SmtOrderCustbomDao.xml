@@ -173,6 +173,8 @@
                 detail.custbom_id = (select id from smt_order_custbom where customer_no= #{bom.customerNo} and product_no =#{bom.productNo})
     </select>
 
+
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO smt_order_custbom(
 			customer_no,

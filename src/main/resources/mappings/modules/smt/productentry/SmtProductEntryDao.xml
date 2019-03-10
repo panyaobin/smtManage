@@ -9,7 +9,9 @@
 		a.product_no AS "productNo",
 		a.order_no AS "orderNo",
 		a.entry_counts AS "entryCounts",
+		a.stock_counts AS "stockCounts",
 		a.product_type AS "productType",
+		a.storage_type AS "storageType",
 		a.create_date AS "createDate",
 		a.create_by AS "createBy.id",
 		a.update_date AS "updateDate",
@@ -42,6 +44,9 @@
             </if>
             <if test="customerNo!=null and customerNo!=''">
                 and a.customer_no=#{customerNo}
+            </if>
+			<if test="storageType!=null and storageType!=''">
+                and a.storage_type=#{storageType}
             </if>
             <if test="productNo!=null and productNo!=''">
                 and a.product_no LIKE '%${productNo}%'
@@ -90,13 +95,40 @@
         limit 1 
     </select>
 
-    <insert id="insert">
+
+	<!--根据电子料名称查询电子料类型（电容 电阻）-->
+	<select id="queryTypeByName" resultType="string">
+		SELECT
+			bom_type
+		FROM
+			smt_order_dzlbom
+		WHERE
+			bom_name = #{name}
+			LIMIT 1
+
+	</select>
+
+	<!--根据入库单号重新打印-->
+	<select id="selectListByOrderNo" resultType="smtProductEntry">
+		SELECT
+			*
+		FROM
+			smt_product_entry a
+			<include refid="smtProductEntryJoins"/>
+		WHERE
+			order_no = #{orderNo}
+
+	</select>
+
+	<insert id="insert">
 		INSERT INTO smt_product_entry(
 			customer_no,
 			product_no,
 			order_no,
 			entry_counts,
+			stock_counts,
 			product_type,
+			storage_type,
 			create_date,
 			create_by,
 			update_date,
@@ -108,7 +140,9 @@
 			#{productNo},
 			#{orderNo},
 			#{entryCounts},
+			#{stockCounts},
 			#{productType},
+			#{storageType},
 			#{createDate},
 			#{createBy.id},
 			#{updateDate},
@@ -124,7 +158,9 @@
 			product_no = #{productNo},
 			order_no = #{orderNo},
 			entry_counts = #{entryCounts},
+			stock_counts = #{stockCounts},
 			product_type = #{productType},
+			storage_type = #{storageType},
 			update_date = #{updateDate},
 			update_by = #{updateBy.id},
 			remarks = #{remarks}

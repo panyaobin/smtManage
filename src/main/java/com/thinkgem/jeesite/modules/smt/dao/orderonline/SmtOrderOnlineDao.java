@@ -6,6 +6,7 @@ package com.thinkgem.jeesite.modules.smt.dao.orderonline;
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.smt.entity.orderonline.SmtOrderOnline;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,4 +27,11 @@ public interface SmtOrderOnlineDao extends CrudDao<SmtOrderOnline> {
      * @return
      */
     String findSendNoFromList();
+
+    /**
+     * 根据发料单号查询发料记录
+     * @param sendNo
+     * @return
+     */
+    List<SmtOrderOnline> findListBySendNo(@Param("sendNo") String sendNo);
 }

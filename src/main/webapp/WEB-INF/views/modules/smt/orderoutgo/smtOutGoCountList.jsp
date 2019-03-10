@@ -151,9 +151,15 @@
             if (counts.trim()==""){
                 showTip("请输入出货数量!")
                 return;
-            } 
+            }
+            debugger
             var rows = $('#dzlUseCounts').bootstrapTable("getData");
-            
+
+            if (typeof rows[0].bomName=="undefined"){
+                showTip("请先计算电子料!")
+                return;
+            }
+
             var arr=[];
             for (var i = 0; i <rows.length ; i++) {
                 var memo={"id":rows[i].id,"bomName":rows[i].bomName,"bomType":rows[i].bomType,"counts":rows[i].counts,"stockCounts":rows[i].stockCounts};

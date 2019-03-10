@@ -186,5 +186,13 @@ public abstract class BaseEntity<T> implements Serializable {
      */
 	public static final String SMT_PRODUCT_TYPE_1 = "1";
 	public static final String SMT_PRODUCT_TYPE_2 = "2";
+
+	/**
+	 * 入库类型 1.成品入库  2。半成品入库
+	 */
+	public static final String SMT_STORAGE_TYPE_1 = "1";
+	public static final String SMT_STORAGE_TYPE_2 = "2";
+
+
 	
 }

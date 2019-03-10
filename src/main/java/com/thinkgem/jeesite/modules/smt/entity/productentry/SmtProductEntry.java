@@ -22,7 +22,7 @@ public class SmtProductEntry extends DataEntity<SmtProductEntry> {
 	private int orderNo;		// 订单号
 	private String entryCounts;		// 成品入库数量
 	private String productType;		// 产品类型
-
+    private String storageType;     //入库类型
 
 
     private String indexs;
@@ -186,5 +186,13 @@ public class SmtProductEntry extends DataEntity<SmtProductEntry> {
 
     public void setStockCountss(String stockCountss) {
         this.stockCountss = stockCountss;
+    }
+
+    public String getStorageType() {
+        return storageType;
+    }
+
+    public void setStorageType(String storageType) {
+        this.storageType = storageType;
     }
 }

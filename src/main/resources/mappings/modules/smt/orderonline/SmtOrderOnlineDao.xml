@@ -78,7 +78,7 @@
 
     <select id="findLists" resultType="SmtOrderOnline">
         select *
-        from 
+        from
         (SELECT
         one.id as "id",
         one.productType as "productType",
@@ -118,7 +118,7 @@
         a.customer_no,
         a.product_type,
         a.product_no ) one
-        LEFT JOIN smt_product_entry pro  ON one.productNo = pro.product_no
+        LEFT JOIN smt_product_entry pro ON one.productNo = pro.product_no
         AND one.customerNo = pro.customer_no
         AND pro.del_flag = 0
         where
@@ -134,7 +134,8 @@
             </when>
             <otherwise>
             </otherwise>
-        </choose>) ww
+        </choose>
+        ) ww
         where ww.counts!=0
         <if test="customerNo!=null and customerNo!=''">
             and ww.customerNo LIKE '%${customerNo}%'
@@ -204,11 +205,11 @@
         a.customer_no,
         a.product_type,
         a.product_no ) one
-        LEFT JOIN smt_product_entry pro  ON one.productNo = pro.product_no
+        LEFT JOIN smt_product_entry pro ON one.productNo = pro.product_no
         AND one.customerNo = pro.customer_no
         AND pro.del_flag = 0
         where
-        1=1 
+        1=1
         <if test="customerNo!=null and customerNo!=''">
             and one.customerNo LIKE '%${customerNo}%'
         </if>
@@ -233,7 +234,7 @@
             </otherwise>
         </choose>
     </select>
-    
+
     <!--查询最大的发料号-->
     <select id="findSendNoFromList" resultType="java.lang.String">
         SELECT 
@@ -295,4 +296,31 @@
 		WHERE id = #{id}
 	</update>
 
+    <!--根据发料单号查询发料记录-->
+    <select id="findListBySendNo" resultType="smtOrderOnline">
+      SELECT
+            a.id AS "id",
+            a.order_no AS "orderNo",
+            a.send_no AS "sendNo",
+            a.customer_no AS "customerNo",
+            b.customer_name AS "customerName",
+            a.product_no AS "productNo",
+            a.product_type AS "productType",
+            a.counts AS "counts",
+            a.create_date AS "createDate",
+            a.create_by AS "createBy.id",
+            a.update_date AS "updateDate",
+            a.update_by AS "updateBy.id",
+            a.remarks AS "remarks",
+            a.del_flag AS "delFlag"
+        FROM
+            smt_order_online a
+            LEFT JOIN smt_sys_customer b ON a.customer_no = b.customer_no
+        WHERE
+            1 = 1
+            AND a.del_flag =0
+            and send_no = #{sendNo}
+        ORDER BY
+            a.create_date DESC
+    </select>
 </mapper>

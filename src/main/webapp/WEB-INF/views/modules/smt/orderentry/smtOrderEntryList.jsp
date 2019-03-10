@@ -216,10 +216,10 @@
     </tbody>
 </table>
 <%--成品入库详情弹窗--%>
-<div class="modal fade" id="orderEntryModal" tabindex="-1" role="dialog" aria-labelledby="ProjectContractModalLabel" aria-hidden="true" style="background-color: #ff99ff">
+<div class="modal fade" id="orderEntryModal" tabindex="-1" role="dialog" aria-labelledby="ProjectContractModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="padding:10px;">
+            <div class="modal-header" style="padding:10px;background-color: #45aeea">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" style="text-align: center"><span id="operateTip">客 户 订 单</span></h4>
                 <input type="hidden" id="customerNo">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row"  style="height: 350px">
                     <table id="orderEntryTableModal"></table>
                 </div>
             </div>

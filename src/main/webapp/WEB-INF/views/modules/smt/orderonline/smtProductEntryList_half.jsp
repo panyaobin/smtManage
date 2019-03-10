@@ -27,13 +27,13 @@
         <li><a href="${ctx}/smt/orderonline/smtOrderOnline/total_list">在线结存</a></li>
     </shiro:hasPermission>
     <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
-        <li class="active"><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list?storageType=1">成品入库记录</a></li>
+        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list?storageType=1">成品入库记录</a></li>
     </shiro:hasPermission>
     <shiro:hasPermission name="smt:orderonline:smtOrderOnline:view">
-        <li><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list_half?storageType=2">半成品入库记录</a></li>
+        <li class="active"><a href="${ctx}/smt/productentry/smtProductEntry/product_entry_list_half?storageType=2">半成品入库记录</a></li>
     </shiro:hasPermission>
 </ul>
-<form:form id="searchForm" modelAttribute="smtProductEntry" action="${ctx}/smt/productentry/smtProductEntry/product_entry_list" method="post" class="breadcrumb form-search">
+<form:form id="searchForm" modelAttribute="smtProductEntry" action="${ctx}/smt/productentry/smtProductEntry/product_entry_list_half" method="post" class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
     <ul class="ul-form">
@@ -86,7 +86,7 @@
                     ${smtProductEntry.productNo}
             </td>
             <td>
-                <a href='${ctx}/smt/productentry/smtProductEntry/entry_re_print?orderNo=${smtProductEntry.orderNo}'>${smtProductEntry.orderNo}</a>
+                    <a href='${ctx}/smt/productentry/smtProductEntry/entry_half_re_print?orderNo=${smtProductEntry.orderNo}'>${smtProductEntry.orderNo}</a>
             </td>
 
             <td>
