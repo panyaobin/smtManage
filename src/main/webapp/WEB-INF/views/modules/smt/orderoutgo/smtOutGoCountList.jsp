@@ -83,6 +83,14 @@
                 cardView: false,                    /// /是否显示详细视图
                 detailView: false,                   /// /是否显示父子表
                 resizable: true,      //设置table可以调整列宽
+                onLoadSuccess: function(result)
+                {
+                    console.log("result: "+result);
+                },
+                onLoadError: function(err)
+                {
+                    console.log("error: "+err);
+                },
                 responseHandler:function (res) {
                     return {total:res.length,rows:res};
                 },
